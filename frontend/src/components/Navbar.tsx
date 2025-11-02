@@ -8,7 +8,6 @@ const navLinks = [
   { label: "Channels", hasDropdown: true },
   { label: "Resources", hasDropdown: true },
   { label: "Pricing", href: "/pricing" },
-  // Test de scroll
   { label: "Blog", href: "/blog" },
   { label: "Community", hasDropdown: true },
   { label: "Support", hasDropdown: true },
@@ -53,13 +52,29 @@ const Navbar: React.FC = () => {
     <nav className="fixed top-0 left-0 right-0 z-50 bg-gray-50/80 dark:bg-gray-900/80 backdrop-blur-sm border-b border-gray-200/50 dark:border-gray-800/50">
       <div className="max-w-7xl mx-auto px-4 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          {/*  */}
-          {/* ... ... */}
+          {/* Left: Logo */}
           <a href="/" className="flex items-center gap-2">
             <img src="/Wiggle Logo.png" alt="AsyPost" className="h-8 w-auto" />
           </a>
 
-          <div className="hidden md:flex items-center gap-6">
+          {/* Center: Get Started (mobile & tablet) */}
+          <a
+            href="/signup"
+            className="lg:hidden px-4 py-2 bg-[#3C48F6] text-white font-medium text-sm rounded-lg hover:bg-[#5C68F8] transition"
+          >
+            Get started
+          </a>
+
+          {/* Right: Hamburger menu (mobile & tablet) */}
+          <button
+            onClick={() => setIsMobileMenuOpen(true)}
+            className="lg:hidden p-2 rounded-lg text-gray-700 dark:text-gray-300"
+          >
+            <FaBars className="w-6 h-6" />
+          </button>
+
+          {/* Desktop navigation (links + buttons) - Only show on large screens */}
+          <div className="hidden lg:flex items-center gap-6">
             {navLinks.map((item) => (
               <div
                 key={item.label}
@@ -81,7 +96,10 @@ const Navbar: React.FC = () => {
                     exit={{ opacity: 0, y: -10 }}
                     className="absolute top-full left-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-xl shadow-xl py-3 border border-gray-200/50 dark:border-gray-700/50"
                   >
-                    <a href="#" className="block px-6 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition">
+                    <a
+                      href="#"
+                      className="block px-6 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition"
+                    >
                       {t("Overview", "Aperçu")}
                     </a>
                   </motion.div>
@@ -89,20 +107,22 @@ const Navbar: React.FC = () => {
               </div>
             ))}
           </div>
-          <div className="hidden md:flex items-center gap-3">
-             <a
+
+          {/* Desktop buttons - Only show on large screens */}
+          <div className="hidden lg:flex items-center gap-3">
+            <a
               href="/login"
-              className="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-[#3C48F6] px-4 py-2 rounded-full border border-gray-300 dark:border-gray-600"
+              className="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-[#3C48F6] px-4 py-2 rounded-full border border-gray-300 dark:border-gray-600 transition-all"
             >
               {t("Log in", "Connexion")}
             </a>
             <a
               href="/signup"
-              className="px-5 py-2 bg-[#3C48F6] text-white font-medium text-sm rounded-full hover:bg-[#5C68F8] transition"
+              className="px-5 py-2 bg-[#3C48F6] text-white font-medium text-sm rounded-full hover:bg-[#5C68F8] transition-all"
             >
               {t("Get started now", "Commencer")}
             </a>
-             <button
+            <button
               onClick={toggleLanguage}
               className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700"
             >
@@ -115,126 +135,136 @@ const Navbar: React.FC = () => {
               {isDark ? <FaSun className="w-5 h-5" /> : <FaMoon className="w-5 h-5" />}
             </button>
           </div>
-
-          <button
-            onClick={() => setIsMobileMenuOpen(true)}
-            className="md:hidden p-2 rounded-lg text-gray-700 dark:text-gray-300"
-          >
-            <FaBars className="w-6 h-6" />
-          </button>
         </div>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile & Tablet Menu */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <>
+            {/* Backdrop */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black/50 z-40"
+              className="fixed inset-0 bg-black/70 z-[999]"
               onClick={() => setIsMobileMenuOpen(false)}
             />
 
-            {/*  */}
+            {/* Mobile Menu Panel */}
             <motion.div
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", damping: 30, stiffness: 220 }}
-
-              className="fixed right-0 top-0 h-full w-[90%] max-w-sm bg-white dark:bg-gray-900 shadow-2xl z-50
-                         flex flex-col" //
+              className="fixed right-0 top-0 h-screen w-[85%] max-w-sm bg-white dark:bg-gray-900 shadow-2xl z-[1000] flex flex-col overflow-hidden"
             >
-              {/* === 1. HEADER (pas de scroll ici) === */}
-              <div className="flex-shrink-0 p-4 border-b border-gray-200/50 dark:border-gray-700/50">
+              {/* Header */}
+              <div className="flex-shrink-0 p-6 border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900">
                 <div className="flex justify-between items-center">
-                  <a href="/" className="flex items-center gap-2">
-                    <img src="/Wiggle Logo.png" alt="AsyPost" className="h-8 w-auto" />
-                  </a>
-
-                  <button
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    className="p-2 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800"
-                  >
-                    <FaXmark className="w-6 h-6" />
-                  </button>
-                </div>
-              </div>
-
-              {/* === 2. NAV LINKS (grandit et scroll) === */}
-              <div className="flex-grow overflow-y-auto p-4 space-y-1">
-                {navLinks.map((item) => (
-                  <div key={item.label}>
-                    {item.href ? (
-                      <a href={item.href} className="w-full block text-left py-3 px-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
-                        <span className="text-base font-medium text-gray-800 dark:text-gray-200">
-                           {item.label}
-                        </span>
-                      </a>
-                    ) : (
-                      <button
-                        onClick={() => setActiveMobileDropdown(activeMobileDropdown === item.label ? null : item.label)}
-                        className="w-full flex justify-between items-center text-left py-3 px-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors"
-                      >
-                        <span className="text-base font-medium text-gray-800 dark:text-gray-200">
-                          {item.label}
-                        </span>
-                        <motion.div
-                          animate={{ rotate: activeMobileDropdown === item.label ? 180 : 0 }}
-                        >
-                          <FaChevronDown className="w-4 h-4 text-gray-500" />
-                        </motion.div>
-                      </button>
-                    )}
-
-                    {/* sous menu */}
-                    <AnimatePresence>
-                      {item.hasDropdown && activeMobileDropdown === item.label && (
-                        <motion.div
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: "auto", opacity: 1 }}
-                          exit={{ height: 0, opacity: 0 }}
-                          className="overflow-hidden pl-4"
-                        >
-                          <div className="pt-2 pb-1 space-y-1 border-l border-gray-200 dark:border-gray-700">
-                            <a href="#" className="block py-2 px-4 text-sm text-gray-600 dark:text-gray-400 hover:text-[#3C48F6]">
-                                {t("Overview", "Aperçu")}
-                            </a>
-                            <a href="#" className="block py-2 px-4 text-sm text-gray-600 dark:text-gray-400 hover:text-[#3C48F6]">
-                                {t("Details", "Détails")}
-                            </a>
-                          </div>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </div>
-                ))}
-              </div>
-
-              {/* === 3. ACTIONS (Toujours pas de scroll) === */}
-              <div className="flex-shrink-0 p-4 border-t border-gray-200/50 dark:border-gray-700/50 space-y-3">
-                <div className="flex items-center justify-between">
-                  <span className="text-sm text-gray-600 dark:text-gray-400">Appearance</span>
                   <div className="flex items-center gap-2">
-                     <button
+                    <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Appearance</span>
+                  </div>
+                  
+                  <div className="flex items-center gap-2">
+                    <button
                       onClick={toggleLanguage}
-                      className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300"
+                      className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
                     >
                       <FaGlobe className="w-5 h-5" />
                     </button>
-                     <button
+                    <button
                       onClick={toggleDarkMode}
-                      className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-yellow-400"
+                      className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-yellow-400 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
                     >
                       {isDark ? <FaSun className="w-5 h-5" /> : <FaMoon className="w-5 h-5" />}
                     </button>
+                    <button
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className="p-2 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                    >
+                      <FaXmark className="w-6 h-6" />
+                    </button>
                   </div>
                 </div>
+              </div>
+
+              {/* Navigation Links */}
+              <div className="flex-grow overflow-y-auto bg-white dark:bg-gray-900">
+                <div className="p-6 space-y-1">
+                  {navLinks.map((item) => (
+                    <div key={item.label} className="border-b border-gray-100 dark:border-gray-700 last:border-b-0">
+                      {item.href ? (
+                        <a 
+                          href={item.href} 
+                          className="block py-4 text-lg font-semibold text-gray-800 dark:text-gray-200 hover:text-[#3C48F6] dark:hover:text-[#3C48F6] transition-colors"
+                          onClick={() => setIsMobileMenuOpen(false)}
+                        >
+                          {item.label}
+                        </a>
+                      ) : (
+                        <>
+                          <button
+                            onClick={() => setActiveMobileDropdown(activeMobileDropdown === item.label ? null : item.label)}
+                            className="w-full flex justify-between items-center py-4 text-lg font-semibold text-gray-800 dark:text-gray-200 hover:text-[#3C48F6] dark:hover:text-[#3C48F6] transition-colors"
+                          >
+                            <span>{item.label}</span>
+                            <motion.div
+                              animate={{ rotate: activeMobileDropdown === item.label ? 180 : 0 }}
+                            >
+                              <FaChevronDown className="w-4 h-4 text-gray-500" />
+                            </motion.div>
+                          </button>
+
+                          {/* Dropdown Content */}
+                          <AnimatePresence>
+                            {item.hasDropdown && activeMobileDropdown === item.label && (
+                              <motion.div
+                                initial={{ height: 0, opacity: 0 }}
+                                animate={{ height: "auto", opacity: 1 }}
+                                exit={{ height: 0, opacity: 0 }}
+                                className="overflow-hidden bg-gray-50 dark:bg-gray-800 rounded-lg mt-2"
+                              >
+                                <div className="py-3 space-y-2">
+                                  <a 
+                                    href="#" 
+                                    className="block px-4 py-2 text-base text-gray-700 dark:text-gray-300 hover:text-[#3C48F6] hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
+                                    onClick={() => setIsMobileMenuOpen(false)}
+                                  >
+                                    {t("Overview", "Aperçu")}
+                                  </a>
+                                  <a 
+                                    href="#" 
+                                    className="block px-4 py-2 text-base text-gray-700 dark:text-gray-300 hover:text-[#3C48F6] hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
+                                    onClick={() => setIsMobileMenuOpen(false)}
+                                  >
+                                    {t("Details", "Détails")}
+                                  </a>
+                                </div>
+                              </motion.div>
+                            )}
+                          </AnimatePresence>
+                        </>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Footer Actions */}
+              <div className="flex-shrink-0 p-6 border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 space-y-3">
+                <a
+                  href="/login"
+                  className="block w-full text-center py-3 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 font-medium rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  {t("Log in", "Connexion")}
+                </a>
+                
                 <a
                   href="/signup"
-                  className="block w-full text-center py-3 bg-[#3C48F6] text-white font-medium text-sm rounded-xl hover:bg-[#5C68F8] transition"
+                  className="block w-full text-center py-3 bg-[#3C48F6] text-white font-medium rounded-xl hover:bg-[#5C68F6] transition-colors"
+                  onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {t("Get started now", "Commencer")}
                 </a>
