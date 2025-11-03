@@ -6,6 +6,7 @@ import Features from './components/Features';
 import Testimonials from './components/Testimonials';
 import CTA from './components/CTA';
 import Footer from './components/Footer';
+import PublishSection from './components/PublishSection';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Navbar />
       <Hero />
       <StatsSection />
+      <PublishSection />
      </div>
   );
 }

@@ -115,7 +115,7 @@ const Hero: React.FC = () => {
         </form>
 
         <p className="mt-3 md:mt-4 text-xs md:text-sm text-gray-500 dark:text-gray-400">
-          By entering your email, you agree to receive emails from AsyPost.
+          By entering your email, you agree to receive emails from EAsyPost.
         </p>
       </div>
     </section>
