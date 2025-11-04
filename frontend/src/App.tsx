@@ -7,6 +7,7 @@ import Testimonials from './components/Testimonials';
 import CTA from './components/CTA';
 import Footer from './components/Footer';
 import PublishSection from './components/PublishSection';
+import CreateSection from './components/CreateSection';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <Hero />
       <StatsSection />
       <PublishSection />
+      <CreateSection />
      </div>
   );
 }

@@ -1,12 +1,12 @@
+/*  App.tsx  */
 import React from 'react';
 import { Calendar, Clock, Wand2, Bell } from "lucide-react";
-
 export default function PublishSection() {
   return (
     <section className="bg-purple-50 min-h-screen flex flex-col items-center justify-center px-4 py-12 md:py-16 lg:py-20">
-      <div className="flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-12 max-w-7xl w-full">
+      <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12 max-w-7xl w-full">
         {/* ---------- LEFT – Post Composer ---------- */}
-        <div className="bg-white rounded-2xl shadow-xl border border-gray-200 w-full max-w-md lg:max-w-lg p-6 flex flex-col mx-auto">
+        <div className="bg-white ml-11 rounded-3xl shadow-xl border border-gray-200 w-full max-w-md lg:max-w-lg p-6 flex flex-col">
           {/* Header */}
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center -space-x-2">
@@ -55,7 +55,7 @@ export default function PublishSection() {
           <div className="grid grid-cols-2 gap-2 mb-4">
             <div className="relative">
               <img
-                src="../../public/Pasta1.jpg"
+                src="/Pasta1.jpg"
                 alt="Pasta"
                 className="w-full h-40 object-cover rounded-lg"
               />
@@ -67,7 +67,7 @@ export default function PublishSection() {
             </div>
             <div className="relative">
               <img
-                src="../../public/Pasta2.jpg"
+                src="/Pasta2.jpg"
                 alt="Plate"
                 className="w-full h-40 object-cover rounded-lg"
               />
@@ -80,17 +80,17 @@ export default function PublishSection() {
           </div>
 
           {/* Footer */}
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
-            <button className="w-full sm:w-auto px-4 py-2 text-sm text-gray-600 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors">
+          <div className="flex items-center justify-between">
+            <button className="px-4 py-2 text-sm text-gray-600 bg-gray-100 rounded-full hover:bg-gray-200">
               Save as Draft
             </button>
 
-            <div className="flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto">
+            <div className="flex items-center gap-3">
               <div className="flex items-center gap-1 text-sm text-gray-500">
                 <Clock className="w-4 h-4" />
                 <span>Thursday 29 11:45 AM</span>
               </div>
-              <button className="w-full sm:w-auto px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-medium transition-colors">
+              <button className="px-6 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 font-medium">
                 Schedule Post
               </button>
             </div>
@@ -98,10 +98,10 @@ export default function PublishSection() {
         </div>
 
         {/* ---------- RIGHT – Copy & CTA ---------- */}
-        <div className="flex-1 max-w-lg space-y-6 text-center lg:text-left mx-auto">
+        <div className="flex-1 max-w-lg space-y-6 ml-20">
           <div>
             <p className="text-sm font-semibold text-[#3C48F6] uppercase tracking-wider">PUBLISH</p>
-            <h2 className="mt-2 text-2xl sm:text-3xl font-bold text-gray-900">
+            <h2 className="mt-2 text-3xl font-bold text-gray-900">
               The most complete set of publishing integrations, ever
             </h2>
           </div>
@@ -125,7 +125,7 @@ export default function PublishSection() {
             />
           </div>
 
-          <button className="w-full sm:w-auto px-6 py-3 bg-[#3C48F6] text-white rounded-lg font-medium flex items-center justify-center gap-2 hover:bg-[#2F3AC7] transition-colors">
+          <button className="w-full md:w-auto px-8 py-3 bg-[#3C48F6] text-white rounded-full   font-medium flex items-center justify-center gap-2">
             Learn more
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -144,7 +144,7 @@ function FeatureItem({ icon, text }: { icon: React.ReactNode; text: string }) {
       <div className="flex-shrink-0 w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
         {icon}
       </div>
-      <p className="text-sm text-gray-600 text-left">{text}</p>
+      <p className="text-sm text-gray-600">{text}</p>
     </div>
   );
 }
