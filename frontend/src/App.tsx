@@ -8,6 +8,8 @@ import CTA from './components/CTA';
 import Footer from './components/Footer';
 import PublishSection from './components/PublishSection';
 import CreateSection from './components/CreateSection';
+import CollaborateSection from './components/CollaborateSection';
+import EngageSection from './components/EngageSection';
 
 function App() {
   return (
@@ -17,6 +19,10 @@ function App() {
       <StatsSection />
       <PublishSection />
       <CreateSection />
+      <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-8">
+        <CollaborateSection />
+        <EngageSection />
+      </div>
      </div>
   );
 }
