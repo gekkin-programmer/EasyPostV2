@@ -56,7 +56,7 @@ const Hero: React.FC = () => {
       />
 
       {/* FLOATING ICONS – Hidden on mobile */}
-      <div className="hidden md:block">
+      <div className="block">
         {desktopIcons.map((item, idx) => {
           const Icon = item.Icon;
           return (
