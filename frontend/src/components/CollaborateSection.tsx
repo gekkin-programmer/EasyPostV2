@@ -114,7 +114,9 @@ export default function CollaborateSection() {
 
       {/* === Learn More Button – Bottom Left (End of Section) === */}
       <div className="mt-auto">
-        <LearnMoreButton />
+                  <a href="#" className="bg-[#3C48F6] text-white font-semibold py-3 px-6 rounded-3xl flex items-center justify-center gap-2 w-fit hover:bg-[#3C48F6]  duration-300 transition-transform ease-in-out hover:scale-105 hover:shadow-2xl">
+                    Learn more 
+                  </a>
       </div>
     </div>
   );

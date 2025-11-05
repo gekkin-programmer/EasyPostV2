@@ -125,7 +125,7 @@ export default function PublishSection() {
             />
           </div>
 
-          <button className="w-full md:w-auto px-8 py-3 bg-[#3C48F6] text-white rounded-full   font-medium flex items-center justify-center gap-2">
+          <button className="w-full md:w-auto px-8 py-3 bg-[#3C48F6] text-white rounded-full   transition-transform hover:scale-105 duration-400 ease-in-out hover:shadow-3xl font-medium flex items-center justify-center gap-2">
             Learn more
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />

@@ -135,7 +135,9 @@ export default function EngageSection() {
 
       {/* === Learn More Button – Bottom Left === */}
       <div className="mt-auto z-20">
-        <LearnMoreButton />
+                  <a href="#" className="bg-[#3C48F6] text-white font-semibold py-3 px-6 rounded-3xl flex items-center justify-center gap-2 w-fit transition-transform duration-400 hover:scale-105 hover:shadow-3xl  hover:bg-[#3C48F6] ease-in-out">
+                    Learn more 
+                  </a>
       </div>
     </div>
   );
