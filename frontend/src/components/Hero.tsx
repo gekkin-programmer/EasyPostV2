@@ -101,11 +101,11 @@ const Hero: React.FC = () => {
             type="email"
             placeholder="Enter your email..."
             required
-            className="flex-1 px-5 py-3 md:py-4 text-base md:text-lg rounded-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500"
+            className="flex-1 px-5 py-3 md:py-4 text-base md:text-lg rounded-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#3C48F6] focus:border-transparent transition"
           />
           <button
             type="submit"
-            className="w-full sm:w-auto px-6 py-3 md:py-4 bg-[#3C48F6] text-white font-medium text-base md:text-lg rounded-full hover:bg-green-600 transition-all duration-200 flex items-center justify-center gap-2"
+            className="w-full sm:w-auto px-6 py-3 md:py-4 bg-[#3C48F6] text-white font-medium text-base md:text-lg rounded-full hover:bg-[#3C48F6] transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-2xl flex items-center justify-center gap-2"
           >
             Get started now
             <svg className="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
