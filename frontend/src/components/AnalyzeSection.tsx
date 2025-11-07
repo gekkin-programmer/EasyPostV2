@@ -1,5 +1,3 @@
-// src/components/AnalyzeSection.tsx
-
 import React from 'react';
 import { 
   FaInstagram, 
@@ -17,10 +15,9 @@ import {
 } from 'react-icons/bs';
 import { IoBarChartOutline } from 'react-icons/io5';
 import { FiUsers, FiTag } from 'react-icons/fi';
-
+import { useLanguage } from '../context/LanguageContext'; // adjust path if needed
 
 // --- TYPE DEFINITIONS for Local Components ---
-
 interface FeatureItemProps {
   icon: React.ReactNode;
   children: React.ReactNode;
@@ -32,9 +29,7 @@ interface RecommendationCardProps {
   value: string;
 }
 
-
-// --- LOCAL COMPONENTS (for use within AnalyzeSection only) ---
-
+// --- LOCAL COMPONENTS ---
 const FeatureItem: React.FC<FeatureItemProps> = ({ icon, children }) => (
   <li className="flex items-start gap-4">
     <div className="text-[#3C48F6] mt-1">{icon}</div>
@@ -42,34 +37,9 @@ const FeatureItem: React.FC<FeatureItemProps> = ({ icon, children }) => (
   </li>
 );
 
-const SvgArrow = () => (
-  <svg 
-    className="absolute top-[155px] left-[590px]" 
-    width="100" 
-    height="100" 
-    viewBox="0 0 100 100"
-    aria-hidden="true"
-  >
-    <defs>
-      <marker id="arrowhead" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-        <path d="M 0 0 L 10 5 L 0 10 z" fill="#a0aec0" />
-      </marker>
-    </defs>
-    <path 
-      d="M 80 5 C 80 50, 20 50, 20 90" 
-      fill="none" 
-      stroke="#a0aec0" 
-      strokeWidth="1.5" 
-      markerEnd="url(#arrowhead)" 
-    />
-  </svg>
-);
-
 const RecommendationCard: React.FC<RecommendationCardProps> = ({ icon, title, value }) => (
   <div className="bg-white rounded-xl shadow-md border border-gray-200/80 p-3 flex items-center gap-4 w-[240px]">
-    <div className="bg-gray-100 p-2 rounded-lg">
-      {icon}
-    </div>
+    <div className="bg-gray-100 p-2 rounded-lg">{icon}</div>
     <div>
       <p className="text-xs text-gray-500">{title}</p>
       <p className="font-semibold text-gray-800">{value}</p>
@@ -147,42 +117,57 @@ const InstagramPostCard = () => (
 );
 
 
-// --- MAIN MERGED COMPONENT ---
-
+// --- MAIN COMPONENT ---
 const AnalyzeSection = () => {
+  const { t } = useLanguage();
+
   return (
     <section className="bg-[#D6EFFF] mt-8 mx-7 py-20 px-4 rounded-3xl sm:px-8 lg:px-16 relative font-sans">
-
       <div className="container mx-auto grid lg:grid-cols-2 gap-8 items-center max-w-7xl">
         
-        {/* Left Column: Text Content */}
+        {/* Left Column */}
         <div className="flex flex-col gap-6 text-gray-800 max-w-lg">
-          <span className="font-semibold tracking-widest text-sm text-[#D6EFFF]-700">ANALYZE</span>
+          <span className="font-semibold tracking-widest text-sm text-[#3C48F6]">{t("ANALYZE", "ANALYSER")}</span>
           <h2 className="text-4xl lg:text-5xl font-bold text-[#232323] leading-tight">
-            Answers, not just analytics
+            {t("Answers, not just analytics", "Des réponses, pas seulement des analyses")}
           </h2>
           <p className="text-lg lg:text-xl text-gray-700 leading-relaxed">
-            Whether it's basic analytics or in-depth reporting, Buffer will help you learn what works and how to improve.
+            {t(
+              "Whether it's basic analytics or in-depth reporting, Buffer will help you learn what works and how to improve.",
+              "Qu'il s'agisse d'analyses de base ou de rapports détaillés, Buffer vous aidera à comprendre ce qui fonctionne et comment vous améliorer."
+            )}
           </p>
           <a href="#" className="bg-[#3C48F6] text-white font-semibold py-3 px-6 rounded-3xl flex items-center justify-center gap-2 w-fit hover:bg-[#3C48F6] transition-colors duration-300">
-            Learn more <FaArrowRight />
+            {t("Learn more", "En savoir plus")} <FaArrowRight />
           </a>
           <ul className="space-y-4 mt-6 text-base">
-            <FeatureItem icon={<IoBarChartOutline size={22} />}>See the best times, formats, and frequencies to post</FeatureItem>
-            <FeatureItem icon={<FiUsers size={22} />}>Get demographic data about your audience</FeatureItem>
-            <FeatureItem icon={<FiTag size={22} />}>Tag and recycle your best-performing content</FeatureItem>
+            <FeatureItem icon={<IoBarChartOutline size={22} />}>
+              {t(
+                "See the best times, formats, and frequencies to post",
+                "Découvrez les meilleurs moments, formats et fréquences pour publier"
+              )}
+            </FeatureItem>
+            <FeatureItem icon={<FiUsers size={22} />}>
+              {t(
+                "Get demographic data about your audience",
+                "Obtenez des données démographiques sur votre audience"
+              )}
+            </FeatureItem>
+            <FeatureItem icon={<FiTag size={22} />}>
+              {t(
+                "Tag and recycle your best-performing content",
+                "Identifiez et recyclez votre contenu le plus performant"
+              )}
+            </FeatureItem>
           </ul>
         </div>
         
-        {/* Right Column: Visual Graphic */}
+        {/* Right Column */}
         <div className="relative flex justify-center lg:justify-start overflow-hidden">
-            <div className="relative w-full min-h-[580px] lg:h-[620px] scale-90 lg:scale-100">
-              <div className="absolute top-0 left-0 w-[850px] h-[580px] bg-white/40 border border-gray-300/50 rounded-2xl backdrop-blur-sm"></div>
-              
-              
-              
-              
-            </div>
+          <div className="relative w-full min-h-[580px] lg:h-[620px] scale-90 lg:scale-100">
+            <div className="absolute top-0 left-0 w-[850px] h-[580px] bg-white/40 border border-gray-300/50 rounded-2xl backdrop-blur-sm"></div>
+            {/* Add any additional widgets or graphics here */}
+          </div>
         </div>
 
       </div>

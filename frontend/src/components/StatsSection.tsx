@@ -1,6 +1,6 @@
-// src/components/StatsSection.tsx
 import React, { useEffect, useRef, useState } from "react";
 import { useInView } from "framer-motion";
+import { useLanguage } from "../context/LanguageContext"; // adjust path
 
 interface StatsCardProps {
   end: number;
@@ -48,13 +48,21 @@ const StatsCard: React.FC<StatsCardProps> = ({ end, label, suffix = "", duration
 };
 
 const StatsSection: React.FC = () => {
+  const { t } = useLanguage();
+
+  const stats = [
+    { end: 191726, label: t("Active users", "Utilisateurs actifs") },
+    { end: 7858881, label: t("Posts published last month", "Publications publiées le mois dernier") },
+    { end: 11, label: t("Social platforms supported", "Plateformes sociales prises en charge") },
+  ];
+
   return (
     <section className="w-full bg-white dark:bg-gray-900 py-12 md:py-16 border-t border-gray-200/50 dark:border-gray-800/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-          <StatsCard end={191726} label="Active users" />
-          <StatsCard end={7858881} label="Posts published last month" />
-          <StatsCard end={11} label="Social platforms supported" />
+          {stats.map((item) => (
+            <StatsCard key={item.label} end={item.end} label={item.label} />
+          ))}
         </div>
       </div>
     </section>

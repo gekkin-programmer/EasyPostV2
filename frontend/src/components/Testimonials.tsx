@@ -1,50 +1,55 @@
 import React from 'react';
+import { useLanguage } from '../context/LanguageContext'; // adjust path
 
-const testimonials = [
+const testimonialsData = [
   {
-    quote: "Buffer has transformed how we manage our social presence. Game-changer!",
+    quote: {
+      en: "Buffer has transformed how we manage our social presence. Game-changer!",
+      fr: "Buffer a transformé notre gestion de la présence sur les réseaux sociaux. Révolutionnaire !"
+    },
     author: "Sarah Johnson, Marketing Lead",
-    avatar: "https://via.placeholder.com/60?text=SJ" // Replace with real photo
+    avatar: "https://via.placeholder.com/60?text=SJ"
   },
-  // Add 2 more similar objects for accuracy
   {
-    quote: "Easy to use and incredibly effective. Highly recommend.",
+    quote: {
+      en: "Easy to use and incredibly effective. Highly recommend.",
+      fr: "Facile à utiliser et incroyablement efficace. Fortement recommandé."
+    },
     author: "Mike Chen, Founder",
     avatar: "https://via.placeholder.com/60?text=MC"
   },
   {
-    quote: "The analytics alone are worth it. Grew our audience by 40%.",
+    quote: {
+      en: "The analytics alone are worth it. Grew our audience by 40%.",
+      fr: "Les analyses seules en valent la peine. Notre audience a augmenté de 40 %."
+    },
     author: "Emma Davis, Content Creator",
     avatar: "https://via.placeholder.com/60?text=ED"
   }
 ];
 
 const Testimonials: React.FC = () => {
+  const { t } = useLanguage();
+
   return (
-    <section style={{ padding: '6rem 0' }}>
-      <div className="container">
-        <h2 style={{ textAlign: 'center', fontSize: '2.5rem', marginBottom: '4rem' }}>
-          Loved by creators and brands
+    <section className="py-24">
+      <div className="container mx-auto">
+        <h2 className="text-center text-4xl font-bold mb-16">
+          {t("Loved by creators and brands", "Apprécié par les créateurs et les marques")}
         </h2>
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-          gap: '2rem'
-        }}>
-          {testimonials.map((testimonial, index) => (
-            <div key={index} style={{
-              padding: '2rem',
-              background: 'var(--bg-light)',
-              borderRadius: '1rem',
-              textAlign: 'center'
-            }}>
+        <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+          {testimonialsData.map((testimonial, index) => (
+            <div
+              key={index}
+              className="bg-white dark:bg-gray-800 rounded-2xl p-8 text-center shadow-md"
+            >
               <img
                 src={testimonial.avatar}
                 alt={testimonial.author}
-                style={{ width: '60px', height: '60px', borderRadius: '50%', marginBottom: '1rem' }}
+                className="w-16 h-16 rounded-full mx-auto mb-4"
               />
-              <p style={{ fontStyle: 'italic', marginBottom: '1rem' }}>"{testimonial.quote}"</p>
-              <p style={{ fontWeight: 600 }}>{testimonial.author}</p>
+              <p className="italic mb-4">"{t(testimonial.quote.en, testimonial.quote.fr)}"</p>
+              <p className="font-semibold">{testimonial.author}</p>
             </div>
           ))}
         </div>
