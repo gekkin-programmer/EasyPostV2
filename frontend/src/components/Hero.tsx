@@ -12,10 +12,18 @@ import {
 } from "react-icons/fa6";
 import { SiTiktok, SiMedium, SiTwitch } from "react-icons/si";
 
-// FLOATING ICONS array stays the same
+// --- FULL FLOATING ICONS ARRAY ---
 const desktopIcons = [
-  { Icon: FaYoutube, pos: "top-12 left-4   md:top-16 md:left-8   lg:top-20 lg:left-12", color: "#ff0000" },
-  // ...rest of your icons
+  { Icon: FaYoutube, pos: "top-12 left-4 md:top-16 md:left-8 lg:top-20 lg:left-12", color: "#FF0000" },
+  { Icon: FaLinkedinIn, pos: "top-24 right-8 md:top-28 md:right-12 lg:top-32 lg:right-16", color: "#0A66C2" },
+  { Icon: FaInstagram, pos: "top-40 left-12 md:top-44 md:left-16 lg:top-48 lg:left-20", color: "#E1306C" },
+  { Icon: FaTwitter, pos: "bottom-24 left-8 md:bottom-28 md:left-12 lg:bottom-32 lg:left-16", color: "#1DA1F2" },
+  { Icon: FaPinterestP, pos: "bottom-12 right-4 md:bottom-16 md:right-8 lg:bottom-20 lg:right-12", color: "#E60023" },
+  { Icon: FaFacebookF, pos: "top-32 right-4 md:top-36 md:right-8 lg:top-40 lg:right-12", color: "#1877F2" },
+  { Icon: SiTiktok, pos: "bottom-32 left-12 md:bottom-36 md:left-16 lg:bottom-40 lg:left-20", color: "#000000" },
+  { Icon: FaThreads, pos: "top-16 left-1/2 md:top-20 md:left-1/2 lg:top-24 lg:left-1/2 -translate-x-1/2", color: "#000000" },
+  { Icon: SiMedium, pos: "bottom-16 left-1/3 md:bottom-20 md:left-1/3 lg:bottom-24 lg:left-1/3", color: "#000000" },
+  { Icon: SiTwitch, pos: "bottom-8 right-1/4 md:bottom-12 md:right-1/4 lg:bottom-16 lg:right-1/4", color: "#9146FF" },
 ];
 
 const randomDelay = (idx: number) => idx * 0.2 + Math.random() * 0.3;
