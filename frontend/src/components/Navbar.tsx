@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaMoon, FaSun, FaChevronDown, FaBars, FaXmark, FaGlobe } from "react-icons/fa6";
+import { useLanguage } from "../context/LanguageContext";
 
 const navLinks = [
   { label: "Features", hasDropdown: true },
@@ -18,18 +19,20 @@ const Navbar: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [hoveredDropdown, setHoveredDropdown] = useState<string | null>(null);
   const [activeMobileDropdown, setActiveMobileDropdown] = useState<string | null>(null);
-  const [language, setLanguage] = useState<"en" | "fr">("en");
+  // const [language, setLanguage] = useState<"en" | "fr">("en");
 
   const toggleDarkMode = () => {
     setIsDark(!isDark);
     document.documentElement.classList.toggle("dark");
   };
 
-  const toggleLanguage = () => {
-    setLanguage(language === "en" ? "fr" : "en");
-  };
+  // const toggleLanguage = () => {
+  //   setLanguage(language === "en" ? "fr" : "en");
+  // };
 
-  const t = (en: string, fr: string) => (language === "en" ? en : fr);
+  // const t = (en: string, fr: string) => (language === "en" ? en : fr);
+  const { language, toggleLanguage, t } = useLanguage();
+
 
   useEffect(() => {
     if (!isMobileMenuOpen) {
