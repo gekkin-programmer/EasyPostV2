@@ -15,10 +15,12 @@ import ConnectSection from './components/ConnectSection';
 import GrowSection from './components/GrowSection';
 import SupportSection from './components/SupportSection';
 import ResourcesSection from './components/ResourcesSection';
+import { LanguageProvider } from './context/LanguageContext';
 
 function App() {
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+   <LanguageProvider>
+     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <Navbar />
       <Hero />
       <StatsSection />
@@ -36,6 +38,7 @@ function App() {
       <SupportSection />
       <ResourcesSection />
      </div>
+   </LanguageProvider>
   );
 }
 

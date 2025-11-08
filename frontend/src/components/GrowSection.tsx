@@ -1,11 +1,9 @@
-// src/components/GrowSection.tsx
-
 import React, { useState } from 'react';
 import { FaCheck, FaInstagram, FaLinkedinIn, FaPaintBrush, FaStore, FaBullhorn } from 'react-icons/fa';
 import { FaXTwitter } from 'react-icons/fa6';
+import { useLanguage } from '../context/LanguageContext'; // adjust path if needed
 
 // --- TYPE DEFINITIONS ---
-// CreatorData type can be used for any profile card
 type CreatorData = {
   imgSrc: string;
   name: string;
@@ -26,7 +24,6 @@ interface ChecklistItemProps {
 }
 
 // --- LOCAL COMPONENTS ---
-
 const TabButton: React.FC<TabButtonProps> = ({ children, isActive, onClick }) => (
   <button
     onClick={onClick}
@@ -42,40 +39,52 @@ const TabButton: React.FC<TabButtonProps> = ({ children, isActive, onClick }) =>
   </button>
 );
 
+<<<<<<< HEAD
 const ChecklistItem: React.FC<ChecklistItemProps> = ({ children }) => (
   <li className="flex items-start gap-3">
     <FaCheck className="h-5 w-5 mt-1 text-[#3C48F6] flex-shrink-0" />
     <span className="text-gray-700">{children}</span>
   </li>
 );
+=======
+const ChecklistItem: React.FC<ChecklistItemProps> = ({ children }) => {
+  const { t } = useLanguage();
+  return (
+    <li className="flex items-start gap-3">
+      <FaCheck className="h-5 w-5 mt-1 text-purple-600 flex-shrink-0" />
+      <span className="text-gray-700">{t(children as string, children as string)}</span>
+    </li>
+  );
+};
+>>>>>>> 45582c0486d7fdaeffa754e48a1e1fcb890cba5a
 
 const CreatorCard: React.FC<CreatorData> = ({ 
   imgSrc, name, followers, platform, platformIcon, iconBgClass 
-}) => (
-  <div className="bg-white/60 rounded-2xl p-6 flex flex-col items-center text-center shadow-sm h-full">
-    <div className="relative mb-4">
-      {/* Increased image size */}
-      <img src={imgSrc} alt={name} className="w-28 h-28 rounded-full object-cover" />
-      <div 
-        className={`
-          absolute -bottom-1 -right-1 h-9 w-9 rounded-full 
-          flex items-center justify-center text-white border-2 border-white
-          ${iconBgClass}
-        `}
-      >
-        {platformIcon}
+}) => {
+  const { t } = useLanguage();
+  return (
+    <div className="bg-white/60 rounded-2xl p-6 flex flex-col items-center text-center shadow-sm h-full">
+      <div className="relative mb-4">
+        <img src={imgSrc} alt={name} className="w-28 h-28 rounded-full object-cover" />
+        <div 
+          className={`
+            absolute -bottom-1 -right-1 h-9 w-9 rounded-full 
+            flex items-center justify-center text-white border-2 border-white
+            ${iconBgClass}
+          `}
+        >
+          {platformIcon}
+        </div>
       </div>
+      <p className="font-bold text-gray-800 text-lg">{name}</p>
+      <p className="text-xs text-gray-500 uppercase tracking-wider mt-1">
+        {followers} {t(platform, platform)}
+      </p>
     </div>
-    <p className="font-bold text-gray-800 text-lg">{name}</p>
-    <p className="text-xs text-gray-500 uppercase tracking-wider mt-1">
-      {followers} {platform}
-    </p>
-  </div>
-);
+  );
+};
 
-
-// --- MOCK DATA FOR EACH TAB ---
-
+// --- MOCK DATA ---
 const creatorsData: CreatorData[] = [
   { imgSrc: '/Rosine 3.jpg', name: '@rosine_ng', followers: '34.9K', platform: 'Followers on X', platformIcon: <FaXTwitter size={16}/>, iconBgClass: 'bg-black' },
   { imgSrc: '/Profile pic.svg', name: '@Pauldelabaume', followers: '21K', platform: 'Followers on LinkedIn', platformIcon: <FaLinkedinIn size={16}/>, iconBgClass: 'bg-[#0A66C2]' },
@@ -94,57 +103,71 @@ const agenciesData: CreatorData[] = [
   { imgSrc: '/agency3.jpg', name: 'Pixel Perfect', followers: 'Top Rated', platform: 'on Dribbble', platformIcon: <FaPaintBrush size={16}/>, iconBgClass: 'bg-pink-500' },
 ];
 
-
-// --- MAIN GrowSection COMPONENT ---
-
+// --- MAIN COMPONENT ---
 const GrowSection = () => {
+  const { t } = useLanguage();
   const [activeTab, setActiveTab] = useState('Creators');
-  const tabs = ['Creators', 'Small businesses', 'Agencies'];
 
-  // Map tab names to their corresponding data
+  // Tab definitions with translation keys
+  const tabs = [
+    { key: 'creators', label: 'Creators' },
+    { key: 'smallBusinesses', label: 'Small businesses' },
+    { key: 'agencies', label: 'Agencies' },
+  ];
+
   const tabContent: { [key: string]: CreatorData[] } = {
     'Creators': creatorsData,
     'Small businesses': businessesData,
     'Agencies': agenciesData,
   };
 
-  // Select the current data based on the active tab
   const currentData = tabContent[activeTab] || [];
 
   return (
     <section className="bg-[#FDFDFC] py-20 px-4 sm:px-8 font-sans">
       <div className="container mx-auto max-w-screen-xl">
+        {/* Tabs */}
         <div className="flex justify-center gap-3 mb-12">
           {tabs.map((tab) => (
-            <TabButton key={tab} isActive={tab === activeTab} onClick={() => setActiveTab(tab)}>
-              {tab}
+            <TabButton 
+              key={tab.key} 
+              isActive={tab.label === activeTab} 
+              onClick={() => setActiveTab(tab.label)}
+            >
+              {t(tab.key, tab.label)}
             </TabButton>
           ))}
         </div>
 
-        {/* Updated Grid: Left column spans 2, Right column spans 3 */}
         <div className="grid lg:grid-cols-5 gap-16 items-center">
-          {/* Left Column */}
+          {/* Left content */}
           <div className="flex flex-col gap-6 lg:col-span-2">
             <h2 className="text-5xl font-bold text-gray-800 leading-tight">
-              Grow from zero → <br /> one → one million
+              {t("Grow from zero → one → one million", "Grandir de zéro → un → un million")}
             </h2>
             <p className="text-lg text-gray-600 leading-relaxed">
-              Whether you're just getting started on your creator journey or scaling your audience to new heights, Buffer will get your content in front of more people.
+              {t(
+                "Whether you're just getting started on your creator journey or scaling your audience to new heights, Buffer will get your content in front of more people.",
+                "Que vous commenciez votre parcours de créateur ou que vous développiez votre audience, Buffer fera connaître votre contenu à plus de personnes."
+              )}
             </p>
             <ul className="space-y-4 mt-4">
-              <ChecklistItem>Save all your ideas as inspiration strikes</ChecklistItem>
-              <ChecklistItem>Learn exactly what content work best and why</ChecklistItem>
-              <ChecklistItem>Create once, crosspost everywhere</ChecklistItem>
+              <ChecklistItem>{t("Save all your ideas as inspiration strikes", "Enregistrez toutes vos idées dès que l'inspiration frappe")}</ChecklistItem>
+              <ChecklistItem>{t("Learn exactly what content work best and why", "Découvrez exactement quel contenu fonctionne le mieux et pourquoi")}</ChecklistItem>
+              <ChecklistItem>{t("Create once, crosspost everywhere", "Créez une fois, publiez partout")}</ChecklistItem>
             </ul>
           </div>
 
-          {/* Right Column (now larger) */}
+          {/* Right cards */}
           <div className="bg-[#f3e8ff] border border-purple-200/80 rounded-3xl p-8 lg:col-span-3">
+<<<<<<< HEAD
             <h3 className="text-sm font-semibold text-[#3C48F6] tracking-widest mb-6">
               THE BUFFER {activeTab.toUpperCase()} COMMUNITY
+=======
+            <h3 className="text-sm font-semibold text-purple-800/90 tracking-widest mb-6">
+              {t("THE BUFFER", "LA COMMUNAUTÉ BUFFER")} {t(activeTab.toLowerCase(), activeTab)} {t("COMMUNITY", "COMMUNAUTÉ")}
+>>>>>>> 45582c0486d7fdaeffa754e48a1e1fcb890cba5a
             </h3>
-            {/* Renders the dynamic `currentData` */}
             <div className="grid md:grid-cols-3 gap-6">
               {currentData.map((creator) => (
                 <CreatorCard key={creator.name} {...creator} />

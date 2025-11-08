@@ -1,8 +1,9 @@
-// src/components/CollaborateSection.tsx
 import React from 'react';
 import { ArrowRight, Check, X } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext'; // adjust path if needed
 
 function LearnMoreButton({ className = '' }: { className?: string }) {
+  const { t } = useLanguage();
   return (
     <button
       className={`
@@ -11,7 +12,7 @@ function LearnMoreButton({ className = '' }: { className?: string }) {
         whitespace-nowrap ${className}
       `}
     >
-      Learn more
+      {t("Learn more", "En savoir plus")}
       <ArrowRight className="w-3.5 h-3.5 ml-0.5" />
     </button>
   );
@@ -37,22 +38,25 @@ function CommentBubble({
 }
 
 export default function CollaborateSection() {
+  const { t } = useLanguage();
+
   return (
     <div className="relative bg-amber-100 rounded-3xl mt-8 p-8 md:p-10 shadow-sm overflow-hidden h-full flex flex-col">
       {/* === Top: Text Content === */}
       <div className="space-y-6 flex-1">
         <p className="text-amber-600 font-medium uppercase tracking-wider text-sm">
-          Collaborate
+          {t("Collaborate", "Collaborer")}
         </p>
 
         <h2 className="mt-2 text-3xl md:text-4xl font-semibold text-gray-900 leading-tight">
-          Great Content, Created Together
+          {t("Great Content, Created Together", "Du contenu génial, créé ensemble")}
         </h2>
 
         <p className="text-gray-700 text-base md:text-lg leading-relaxed">
-          Collaborate seamlessly with your team. Invite unlimited
-          collaborators, assign roles and permissions, and keep everyone
-          aligned with saved drafts and notes.
+          {t(
+            "Collaborate seamlessly with your team. Invite unlimited collaborators, assign roles and permissions, and keep everyone aligned with saved drafts and notes.",
+            "Collaborez facilement avec votre équipe. Invitez des collaborateurs illimités, attribuez des rôles et des autorisations, et gardez tout le monde aligné grâce aux brouillons et notes sauvegardés."
+          )}
         </p>
       </div>
 
@@ -61,13 +65,13 @@ export default function CollaborateSection() {
         {/* Floating comment bubbles */}
         <CommentBubble
           avatar="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&h=80&fit=crop"
-          text="This image looks so good!"
+          text={t("This image looks so good!", "Cette image est superbe !")}
           className="left-6 top-4"
         />
 
         <CommentBubble
           avatar="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&h=80&fit=crop"
-          text="Good to go!"
+          text={t("Good to go!", "Prêt à être publié !")}
           className="right-6 bottom-16"
         />
 
@@ -82,7 +86,10 @@ export default function CollaborateSection() {
             <div className="flex-1">
               <p className="font-medium text-gray-900">yoyo_ceramics</p>
               <p className="text-sm text-gray-600 mt-1">
-                Our new autumn collection just dropped! Let us know your favourite piece…
+                {t(
+                  "Our new autumn collection just dropped! Let us know your favourite piece…",
+                  "Notre nouvelle collection d'automne vient de sortir ! Dites-nous quelle pièce vous préférez…"
+                )}
               </p>
             </div>
           </div>
@@ -91,7 +98,7 @@ export default function CollaborateSection() {
           <div className="mt-4">
             <img
               src="/Automn.jpg"
-              alt="Autumn pottery collection"
+              alt={t("Autumn pottery collection", "Collection de poterie d'automne")}
               className="w-full h-48 md:h-56 object-cover rounded-xl shadow-sm"
             />
           </div>
@@ -100,23 +107,19 @@ export default function CollaborateSection() {
           <div className="mt-4 flex gap-2 justify-center">
             <button className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-gray-700 bg-gray-100 rounded-full hover:bg-gray-200 transition">
               <X className="w-4 h-4" />
-              Reject
+              {t("Reject", "Refuser")}
             </button>
             <button className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-white bg-indigo-600 rounded-full hover:bg-indigo-700 transition">
               <Check className="w-4 h-4" />
-              Approve
+              {t("Approve", "Approuver")}
             </button>
           </div>
         </div>
-
-
       </div>
 
-      {/* === Learn More Button – Bottom Left (End of Section) === */}
+      {/* === Learn More Button – Bottom Left === */}
       <div className="mt-auto">
-                  <a href="#" className="bg-[#3C48F6] text-white font-semibold py-3 px-6 rounded-3xl flex items-center justify-center gap-2 w-fit hover:bg-[#3C48F6]  duration-300 transition-transform ease-in-out hover:scale-105 hover:shadow-2xl">
-                    Learn more 
-                  </a>
+        <LearnMoreButton />
       </div>
     </div>
   );

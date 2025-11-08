@@ -1,18 +1,21 @@
-/*  App.tsx  */
 import React from 'react';
 import { Calendar, Clock, Wand2, Bell } from "lucide-react";
+import { useLanguage } from '../context/LanguageContext'; // adjust path if needed
+
 export default function PublishSection() {
+  const { t } = useLanguage();
+
   return (
     <section className="bg-purple-50 min-h-screen flex flex-col items-center justify-center px-4 py-12 md:py-16 lg:py-20">
-      <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12 max-w-7xl w-full">
+      <div className="flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-12 max-w-7xl w-full">
         {/* ---------- LEFT – Post Composer ---------- */}
-        <div className="bg-white ml-11 rounded-3xl shadow-xl border border-gray-200 w-full max-w-md lg:max-w-lg p-6 flex flex-col">
+        <div className="bg-white rounded-2xl shadow-xl border border-gray-200 w-full max-w-md lg:max-w-lg p-6 flex flex-col mx-auto">
           {/* Header */}
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center -space-x-2">
               <img
                 src="../../public/avatar.svg"
-                alt="User"
+                alt={t("User", "Utilisateur")}
                 className="w-10 h-10 rounded-full border-2 border-white"
               />
               <div className="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center">
@@ -39,24 +42,26 @@ export default function PublishSection() {
 
             <div className="flex items-center gap-2 text-sm text-gray-500">
               <span className="w-2 h-2 bg-green-500 rounded-full"></span>
-              <span>Thursday 29 11:45 AM</span>
+              <span>{t("Thursday 29 11:45 AM", "Jeudi 29 11:45")}</span>
             </div>
           </div>
 
           {/* Post Text */}
           <div className="mb-4">
             <p className="text-base font-medium text-gray-900">
-              Nothing beats the taste of fresh, homemade pasta
+              {t("Nothing beats the taste of fresh, homemade pasta", "Rien ne vaut le goût des pâtes fraîches faites maison")}
             </p>
-            <p className="text-sm text-gray-500">#ChefsOfThreads #Pasta #Food</p>
+            <p className="text-sm text-gray-500">
+              {t("#ChefsOfThreads #Pasta #Food", "#ChefsOfThreads #Pâtes #Nourriture")}
+            </p>
           </div>
 
           {/* Images */}
           <div className="grid grid-cols-2 gap-2 mb-4">
             <div className="relative">
               <img
-                src="/Pasta1.jpg"
-                alt="Pasta"
+                src="../../public/Pasta1.jpg"
+                alt={t("Pasta", "Pâtes")}
                 className="w-full h-40 object-cover rounded-lg"
               />
               <button className="absolute top-2 right-2 bg-white rounded-full p-1 shadow">
@@ -67,8 +72,8 @@ export default function PublishSection() {
             </div>
             <div className="relative">
               <img
-                src="/Pasta2.jpg"
-                alt="Plate"
+                src="../../public/Pasta2.jpg"
+                alt={t("Plate", "Assiette")}
                 className="w-full h-40 object-cover rounded-lg"
               />
               <button className="absolute top-2 right-2 bg-white rounded-full p-1 shadow">
@@ -80,53 +85,58 @@ export default function PublishSection() {
           </div>
 
           {/* Footer */}
-          <div className="flex items-center justify-between">
-            <button className="px-4 py-2 text-sm text-gray-600 bg-gray-100 rounded-full hover:bg-gray-200">
-              Save as Draft
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
+            <button className="w-full sm:w-auto px-4 py-2 text-sm text-gray-600 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors">
+              {t("Save as Draft", "Enregistrer comme brouillon")}
             </button>
 
-            <div className="flex items-center gap-3">
+            <div className="flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto">
               <div className="flex items-center gap-1 text-sm text-gray-500">
                 <Clock className="w-4 h-4" />
-                <span>Thursday 29 11:45 AM</span>
+                <span>{t("Thursday 29 11:45 AM", "Jeudi 29 11:45")}</span>
               </div>
-              <button className="px-6 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 font-medium">
-                Schedule Post
+              <button className="w-full sm:w-auto px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-medium transition-colors">
+                {t("Schedule Post", "Programmer le post")}
               </button>
             </div>
           </div>
         </div>
 
         {/* ---------- RIGHT – Copy & CTA ---------- */}
-        <div className="flex-1 max-w-lg space-y-6 ml-20">
+        <div className="flex-1 max-w-lg space-y-6 text-center lg:text-left mx-auto">
           <div>
-            <p className="text-sm font-semibold text-[#3C48F6] uppercase tracking-wider">PUBLISH</p>
-            <h2 className="mt-2 text-3xl font-bold text-gray-900">
-              The most complete set of publishing integrations, ever
+            <p className="text-sm font-semibold text-[#3C48F6] uppercase tracking-wider">
+              {t("PUBLISH", "PUBLIER")}
+            </p>
+            <h2 className="mt-2 text-2xl sm:text-3xl font-bold text-gray-900">
+              {t("The most complete set of publishing integrations, ever", "L'ensemble le plus complet d'intégrations de publication, jamais")}
             </h2>
           </div>
 
           <p className="text-base text-gray-600">
-            Schedule your content to the most popular platforms including Facebook, Instagram, TikTok, LinkedIn, Threads, Bluesky, YouTube Shorts, Pinterest, Google Business, Mastodon and X.
+            {t(
+              "Schedule your content to the most popular platforms including Facebook, Instagram, TikTok, LinkedIn, Threads, Bluesky, YouTube Shorts, Pinterest, Google Business, Mastodon and X.",
+              "Planifiez votre contenu sur les plateformes les plus populaires : Facebook, Instagram, TikTok, LinkedIn, Threads, Bluesky, YouTube Shorts, Pinterest, Google Business, Mastodon et X."
+            )}
           </p>
 
           <div className="space-y-4">
             <FeatureItem
               icon={<Bell className="w-5 h-5 text-[#3C48F6]" />}
-              text="Auto-publish your content or get a notification when it's time to post"
+              text={t("Auto-publish your content or get a notification when it's time to post", "Publiez automatiquement votre contenu ou recevez une notification lorsqu'il est temps de poster")}
             />
             <FeatureItem
               icon={<Wand2 className="w-5 h-5 text-[#3C48F6]" />}
-              text="Magically customize and repurpose your post for each platform"
+              text={t("Magically customize and repurpose your post for each platform", "Personnalisez et réutilisez magiquement votre post pour chaque plateforme")}
             />
             <FeatureItem
               icon={<Calendar className="w-5 h-5 text-indigo-600" />}
-              text="See everything you have scheduled in a calendar or queue view"
+              text={t("See everything you have scheduled in a calendar or queue view", "Voyez tout ce que vous avez programmé dans un calendrier ou une vue de file d'attente")}
             />
           </div>
 
-          <button className="w-full md:w-auto px-8 py-3 bg-[#3C48F6] text-white rounded-full   transition-transform hover:scale-105 duration-400 ease-in-out hover:shadow-3xl font-medium flex items-center justify-center gap-2">
-            Learn more
+          <button className="w-full sm:w-auto px-6 py-3 bg-[#3C48F6] text-white rounded-lg font-medium flex items-center justify-center gap-2 hover:bg-[#2F3AC7] transition-colors">
+            {t("Learn more", "En savoir plus")}
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
@@ -139,12 +149,13 @@ export default function PublishSection() {
 
 /* Helper component for the three feature rows */
 function FeatureItem({ icon, text }: { icon: React.ReactNode; text: string }) {
+  const { t } = useLanguage();
   return (
     <div className="flex items-start gap-3">
       <div className="flex-shrink-0 w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
         {icon}
       </div>
-      <p className="text-sm text-gray-600">{text}</p>
+      <p className="text-sm text-gray-600 text-left">{text}</p>
     </div>
   );
 }
