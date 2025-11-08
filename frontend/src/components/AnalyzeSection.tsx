@@ -179,9 +179,7 @@ const AnalyzeSection = () => {
             <div className="relative w-full min-h-[580px] lg:h-[620px] scale-90 lg:scale-100">
               <div className="absolute top-0 left-0 w-[850px] h-[580px] bg-white/40 border border-gray-300/50 rounded-2xl backdrop-blur-sm"></div>
               
-              
-              
-              
+
             </div>
         </div>
 

@@ -1,152 +1,215 @@
 import React from 'react';
-import {
-  FaArrowRight,
-  FaBullhorn,
-  FaBookOpen,
-  FaGraduationCap,
-  FaTools,
-  FaTags,
-} from 'react-icons/fa';
-import { BsClockHistory } from 'react-icons/bs';
+import { motion } from 'framer-motion';
+import { useState } from 'react';
 
-// Subcomponent: badge
-const Kicker = ({ children }: { children: React.ReactNode }) => (
-  <span className="inline-flex items-center gap-2 rounded-full border border-purple-200 bg-purple-50 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-purple-700">
-    {children}
-  </span>
-);
+const resources = [
+  {
+    id: 1,
+    title: "Social Media Marketing",
+    description: "Master the art of social selling with our comprehensive marketing guides",
+    bgGradient: "from-blue-500 to-cyan-500",
+    image: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    id: 2,
+    title: "Marketing Resources",
+    description: "Access our library of templates, guides, and best practices",
+    bgGradient: "from-purple-500 to-pink-500",
+    image: "https://images.unsplash.com/photo-1432888622747-4eb9a8f2c293?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    id: 3,
+    title: "Best Time to Post",
+    description: "Optimize your posting schedule with data-driven insights",
+    bgGradient: "from-green-500 to-emerald-500",
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    id: 4,
+    title: "Marketing 101",
+    description: "New to marketing? Start with our beginner-friendly guide",
+    bgGradient: "from-yellow-500 to-orange-500",
+    image: "https://images.unsplash.com/photo-1553877522-43269d4ea984?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    id: 5,
+    title: "Social Media Glossary",
+    description: "Demystify marketing jargon with our comprehensive glossary",
+    bgGradient: "from-red-500 to-rose-500",
+    image: "https://images.unsplash.com/photo-1456324504439-367cee3b3c32?w=800&auto=format&fit=crop&q=80"
+  },
+  {
+    id: 6,
+    title: "Free Marketing Tools",
+    description: "Powerful tools to boost your marketing efforts, completely free",
+    bgGradient: "from-indigo-500 to-purple-500",
+    image: "https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?w=800&auto=format&fit=crop&q=80"
+  }
+];
 
-// Subcomponent: resource card
-type ResourceCardProps = {
-  icon: React.ReactNode;
+type Resource = {
+  id: number;
   title: string;
   description: string;
-  href?: string;
-  accent?: string; // Tailwind color class for ring/hover
+  bgGradient: string;
+  image: string;
 };
 
-const ResourceCard: React.FC<ResourceCardProps> = ({
-  icon,
-  title,
-  description,
-  href = '#',
-  accent = 'purple',
-}) => {
+interface ResourceCardProps {
+  resource: Resource;
+  index: number;
+}
+
+const ResourceCard = ({ resource, index }: ResourceCardProps) => {
+  const [isHovered, setIsHovered] = useState(false);
+
   return (
-    <a
-      href={href}
-      className={`
-        group relative block rounded-2xl border border-gray-200 bg-white p-7 shadow-sm
-        transition-all duration-300 ease-out focus:outline-none
-        hover:-translate-y-1 hover:shadow-lg
-        focus-visible:-translate-y-1 focus-visible:shadow-lg
-        hover:ring-2 hover:ring-${accent}-300/60 hover:ring-offset-2
-        focus-visible:ring-2 focus-visible:ring-${accent}-300/60 focus-visible:ring-offset-2
-      `}
+    <motion.div
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+      whileHover={{ y: -10 }}
+      className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
-      <div
-        className={`
-          inline-flex h-12 w-12 items-center justify-center rounded-xl
-          bg-${accent}-50 text-${accent}-600 transition-colors duration-300
-          group-hover:bg-${accent}-600 group-hover:text-white
-        `}
-      >
-        {icon}
+      {/* Image Background */}
+      <div className="relative h-64 overflow-hidden">
+        <motion.img
+          src={resource.image}
+          alt={resource.title}
+          className="w-full h-full object-cover"
+          animate={{ scale: isHovered ? 1.1 : 1 }}
+          transition={{ duration: 0.6 }}
+        />
+        {/* Gradient Overlay */}
+        <div className={`absolute inset-0 bg-gradient-to-br ${resource.bgGradient} opacity-60 group-hover:opacity-75 transition-opacity duration-500`}></div>
+        
+        {/* Floating Badge */}
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-semibold text-gray-800"
+        >
+          New
+        </motion.div>
       </div>
 
-      <h3 className="mt-4 text-xl font-semibold text-gray-900">{title}</h3>
-      <p className="mt-2 text-gray-600 leading-relaxed">{description}</p>
+      {/* Content */}
+      <div className="relative bg-white p-6">
+        <h3 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors duration-300">
+          {resource.title}
+        </h3>
+        <p className="text-gray-600 mb-4 leading-relaxed">
+          {resource.description}
+        </p>
+        
+        <motion.button
+          className="flex items-center text-blue-600 font-semibold group/button"
+          whileHover={{ x: 5 }}
+        >
+          <span>Learn More</span>
+          <svg 
+            className={`ml-2 w-5 h-5 transition-transform duration-300 ${isHovered ? 'translate-x-2' : ''}`}
+            fill="none" 
+            stroke="currentColor" 
+            viewBox="0 0 24 24"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+          </svg>
+        </motion.button>
+      </div>
 
-      <span className="mt-4 inline-flex items-center gap-2 font-semibold text-gray-900/80">
-        Read more
-        <FaArrowRight className="transition-transform duration-300 group-hover:translate-x-1" />
-      </span>
-
-      {/* subtle gradient edge on hover */}
-      <div className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-           style={{ background: 'radial-gradient(1200px 200px at 50% 110%, rgba(147, 51, 234, .08), transparent 60%)' }} />
-    </a>
+      {/* Decorative Element */}
+      <div className={`absolute bottom-0 left-0 h-1 bg-gradient-to-r ${resource.bgGradient} transition-all duration-500 ${isHovered ? 'w-full' : 'w-0'}`}></div>
+    </motion.div>
   );
 };
 
-const ResourcesSection: React.FC = () => {
-  const resources: ResourceCardProps[] = [
-    {
-      icon: <FaBullhorn size={22} />,
-      title: 'Social Media Marketing',
-      description:
-        'Strategy frameworks, playbooks, and examples to drive growth with EasyPost at the core of your workflow.',
-      accent: 'purple',
-    },
-    {
-      icon: <FaBookOpen size={22} />,
-      title: 'Social Media Resources',
-      description:
-        'A curated library of guides, templates, and case studies—updated regularly with what actually works.',
-      accent: 'sky',
-    },
-    {
-      icon: <BsClockHistory size={22} />,
-      title: 'Best Time to Post',
-      description:
-        'Use data-backed recommendations to publish when your audience is most likely to engage.',
-      accent: 'emerald',
-    },
-    {
-      icon: <FaGraduationCap size={22} />,
-      title: 'Social Media Marketing 101',
-      description:
-        'Start here. Learn the fundamentals and build a repeatable growth system around EasyPost.',
-      accent: 'rose',
-    },
-    {
-      icon: <FaTags size={22} />,
-      title: 'Social Media Glossary',
-      description:
-        'Cut through the jargon. Clear definitions for every term you’ll meet in modern marketing.',
-      accent: 'amber',
-    },
-    {
-      icon: <FaTools size={22} />,
-      title: 'Free Marketing Tools',
-      description:
-        'Create, optimize, and analyze—access a suite of free tools that plug neatly into your stack.',
-      accent: 'indigo',
-    },
-  ];
-
+const ResourcesSection = () => {
   return (
-    <section className="bg-gray-50 py-24 px-4 font-sans">
-      <div className="container mx-auto max-w-7xl">
-        {/* Header */}
-        <div className="mx-auto max-w-3xl text-center">
-          <Kicker>Resources</Kicker>
-          <h2 className="mt-3 text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
-            The EasyPost Resource Hub
-          </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-lg leading-relaxed text-gray-600">
-            World‑class guides and tools to help you plan, publish, and grow. Learn from best‑in‑class playbooks and
-            bring EasyPost into a scalable marketing workflow.
-          </p>
-        </div>
+    <section className="relative py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-gray-50 via-white to-gray-50 overflow-hidden">
+      {/* Decorative Background Elements */}
+      <div className="absolute top-0 left-0 w-72 h-72 bg-blue-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
+      <div className="absolute top-0 right-0 w-72 h-72 bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
+      <div className="absolute bottom-0 left-1/2 w-72 h-72 bg-pink-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-4000"></div>
 
-        {/* Grid */}
-        <div className="mt-14 grid grid-cols-1 gap-7 md:grid-cols-2 lg:grid-cols-3">
-          {resources.map((item) => (
-            <ResourceCard key={item.title} {...item} />
+      <div className="relative max-w-7xl mx-auto">
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="text-center mb-16"
+        >
+          <motion.div
+            initial={{ scale: 0 }}
+            whileInView={{ scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-50 to-purple-50 border border-blue-200 rounded-full mb-6"
+          >
+            <span className="relative flex h-3 w-3">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-3 w-3 bg-blue-500"></span>
+            </span>
+            <span className="text-sm font-semibold text-gray-700">Resource Center</span>
+          </motion.div>
+
+          <h2 className="text-5xl md:text-6xl font-bold mb-6">
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600">
+              Everything You Need
+            </span>
+            <br />
+            <span className="text-gray-900">to Succeed</span>
+          </h2>
+          
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            Unlock the full potential of your marketing strategy with our comprehensive 
+            <span className="font-semibold text-gray-800"> resource library</span>, curated by industry experts
+          </p>
+        </motion.div>
+
+        {/* Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+          {resources.map((resource, index) => (
+            <ResourceCard key={resource.id} resource={resource} index={index} />
           ))}
         </div>
 
-        {/* CTA */}
-        <div className="mt-16 text-center">
-          <a
-            href="#"
-            className="inline-flex items-center gap-2 rounded-xl bg-[#2C4B42] px-8 py-4 text-base font-semibold text-white transition-colors duration-300 hover:bg-[#21352f] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-300 focus-visible:ring-offset-2"
-          >
-            Explore all resources
-            <FaArrowRight />
-          </a>
-        </div>
+        {/* CTA Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="relative bg-gradient-to-r from-blue-600 to-purple-600 rounded-3xl p-12 text-center overflow-hidden"
+        >
+          {/* Decorative circles */}
+          <div className="absolute top-0 right-0 w-40 h-40 bg-white/10 rounded-full -mr-20 -mt-20"></div>
+          <div className="absolute bottom-0 left-0 w-40 h-40 bg-white/10 rounded-full -ml-20 -mb-20"></div>
+          
+          <div className="relative z-10">
+            <h3 className="text-3xl font-bold text-white mb-4">
+              Can't find what you're looking for?
+            </h3>
+            <p className="text-blue-100 mb-8 text-lg max-w-2xl mx-auto">
+              Browse our complete resource library with 100+ guides, templates, and tools
+            </p>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="bg-white text-blue-600 font-bold py-4 px-10 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 inline-flex items-center gap-3"
+            >
+              Browse All Resources
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+              </svg>
+            </motion.button>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

@@ -87,7 +87,7 @@ export default function CreateSection() {
             any channel. There’s also an <strong>AI Assistant</strong> if you need it.
           </p>
 
-          <button className="inline-flex items-center gap-2 bg-[#3C48F6] text-white font-medium px-6 py-3 rounded-full hover:bg-emerald-800 transition">
+          <button className="inline-flex items-center gap-2 bg-[#3C48F6] text-white font-medium px-6 py-3 rounded-full hover:bg-[#3C48F6] hover:scale-105 ease-in-out hover:shadow-3xl duration:300 transition">
             Learn more
             <ArrowRight className="w-5 h-5" />
           </button>

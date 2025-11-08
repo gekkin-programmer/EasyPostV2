@@ -47,7 +47,7 @@ const SocialLink: React.FC<SocialLinkProps> = ({ name, icon, hoverColor }) => {
           group-hover:opacity-100
         "
       >
-        Buffer &times; {name} &rarr;
+        EAsyPost &times; {name} &rarr;
       </p>
     </div>
   );

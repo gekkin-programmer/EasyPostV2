@@ -81,7 +81,7 @@ export default function EngageSection() {
           <div className="flex gap-3">
             {/* === REAL POST IMAGE === */}
             <img
-              src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=400&h=400&fit=crop"
+              src="Group 4.svg"
               alt="Knit-along project"
               className="w-20 h-20 rounded-xl object-cover shadow-sm flex-shrink-0"
             />
@@ -99,7 +99,7 @@ export default function EngageSection() {
 
           {/* Comment 1 */}
           <CommentItem
-            avatar="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=60&h=60&fit=crop"
+            avatar="/Profile pic.svg"
             name="rachelastral"
             text="Love this idea! How do I sign up?"
             time="5h"
@@ -125,7 +125,7 @@ export default function EngageSection() {
 
           {/* Comment 2 */}
           <CommentItem
-            avatar="https://images.unsplash.com/photo-1554151228-14d9def656e4?w=60&h=60&fit=crop"
+            avatar="/Pasta1.jpg"
             name="Maya Cook"
             text="Great idea Emma!"
             time="45m"

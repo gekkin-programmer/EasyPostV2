@@ -105,7 +105,7 @@ const Hero: React.FC = () => {
           />
           <button
             type="submit"
-            className="w-full sm:w-auto px-6 py-3 md:py-4 bg-[#3C48F6] text-white font-medium text-base md:text-lg rounded-full hover:bg-[#3C48F6] transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-2xl flex items-center justify-center gap-2"
+            className="w-full sm:w-auto px-6 py-5 md:py-4 bg-[#3C48F6] text-white font-medium text-base md:text-lg rounded-full hover:bg-[#3C48F6] transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-2xl flex items-center justify-center gap-2"
           >
             Get started now
             <svg className="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
