@@ -92,13 +92,8 @@ export default function EngageSection() {
           {/* Post Preview */}
           <div className="flex gap-3">
             <img
-<<<<<<< HEAD
-              src="Group 4.svg"
-              alt="Knit-along project"
-=======
               src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=400&h=400&fit=crop"
               alt={t("Knit-along project", "Projet de tricot collaboratif")}
->>>>>>> 45582c0486d7fdaeffa754e48a1e1fcb890cba5a
               className="w-20 h-20 rounded-xl object-cover shadow-sm flex-shrink-0"
             />
 

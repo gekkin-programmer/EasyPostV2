@@ -14,6 +14,7 @@ import AnalyzeSection from './components/AnalyzeSection';
 import ConnectSection from './components/ConnectSection';
 import GrowSection from './components/GrowSection';
 import SupportSection from './components/SupportSection';
+import ResourceSection from './components/ResourceSection';
 import ResourcesSection from './components/ResourcesSection';
 import { LanguageProvider } from './context/LanguageContext';
 
@@ -35,8 +36,9 @@ function App() {
       </div>
       <ConnectSection />
       <GrowSection />
+      <ResourceSection />
       <SupportSection />
-      <ResourcesSection />
+      <Footer />
      </div>
    </LanguageProvider>
   );

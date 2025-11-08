@@ -44,11 +44,8 @@ const SocialLink: React.FC<SocialLinkProps> = ({ name, icon, hoverColor }) => {
           group-hover:opacity-100
         "
       >
-<<<<<<< HEAD
-        EAsyPost &times; {name} &rarr;
-=======
+
         {t(`Connect with ${name}`, `Connectez-vous à ${name}`)} &rarr;
->>>>>>> 45582c0486d7fdaeffa754e48a1e1fcb890cba5a
       </p>
     </div>
   );

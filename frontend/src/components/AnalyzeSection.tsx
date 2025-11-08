@@ -164,18 +164,11 @@ const AnalyzeSection = () => {
         
         {/* Right Column */}
         <div className="relative flex justify-center lg:justify-start overflow-hidden">
-<<<<<<< HEAD
-            <div className="relative w-full min-h-[580px] lg:h-[620px] scale-90 lg:scale-100">
-              <div className="absolute top-0 left-0 w-[850px] h-[580px] bg-white/40 border border-gray-300/50 rounded-2xl backdrop-blur-sm"></div>
-              
 
-            </div>
-=======
           <div className="relative w-full min-h-[580px] lg:h-[620px] scale-90 lg:scale-100">
             <div className="absolute top-0 left-0 w-[850px] h-[580px] bg-white/40 border border-gray-300/50 rounded-2xl backdrop-blur-sm"></div>
             {/* Add any additional widgets or graphics here */}
           </div>
->>>>>>> 45582c0486d7fdaeffa754e48a1e1fcb890cba5a
         </div>
 
       </div>

@@ -14,12 +14,12 @@ const SupportSection = () => {
         "
       >
         {/* Top Label */}
-        <p className="text-sm font-semibold uppercase tracking-widest text-[#3C48F6]">
+        <p className="text-sm font-semibold uppercase tracking-widest text-[#0F172A]">
           {t("Customer Support", "Support client")}
         </p>
 
         {/* Main Heading */}
-        <h2 className="text-5xl font-bold text-[#3C48F6] leading-tight">
+        <h2 className="text-5xl font-bold text-[#0F172A] leading-tight">
           {t("Human support, worldwide", "Support humain, partout dans le monde")}
         </h2>
 

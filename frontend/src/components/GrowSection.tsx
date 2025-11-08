@@ -39,14 +39,7 @@ const TabButton: React.FC<TabButtonProps> = ({ children, isActive, onClick }) =>
   </button>
 );
 
-<<<<<<< HEAD
-const ChecklistItem: React.FC<ChecklistItemProps> = ({ children }) => (
-  <li className="flex items-start gap-3">
-    <FaCheck className="h-5 w-5 mt-1 text-[#3C48F6] flex-shrink-0" />
-    <span className="text-gray-700">{children}</span>
-  </li>
-);
-=======
+
 const ChecklistItem: React.FC<ChecklistItemProps> = ({ children }) => {
   const { t } = useLanguage();
   return (
@@ -56,7 +49,7 @@ const ChecklistItem: React.FC<ChecklistItemProps> = ({ children }) => {
     </li>
   );
 };
->>>>>>> 45582c0486d7fdaeffa754e48a1e1fcb890cba5a
+
 
 const CreatorCard: React.FC<CreatorData> = ({ 
   imgSrc, name, followers, platform, platformIcon, iconBgClass 
@@ -160,13 +153,11 @@ const GrowSection = () => {
 
           {/* Right cards */}
           <div className="bg-[#f3e8ff] border border-purple-200/80 rounded-3xl p-8 lg:col-span-3">
-<<<<<<< HEAD
-            <h3 className="text-sm font-semibold text-[#3C48F6] tracking-widest mb-6">
-              THE BUFFER {activeTab.toUpperCase()} COMMUNITY
-=======
+
+
             <h3 className="text-sm font-semibold text-purple-800/90 tracking-widest mb-6">
               {t("THE BUFFER", "LA COMMUNAUTÉ BUFFER")} {t(activeTab.toLowerCase(), activeTab)} {t("COMMUNITY", "COMMUNAUTÉ")}
->>>>>>> 45582c0486d7fdaeffa754e48a1e1fcb890cba5a
+
             </h3>
             <div className="grid md:grid-cols-3 gap-6">
               {currentData.map((creator) => (

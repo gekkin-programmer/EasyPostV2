@@ -1,17 +1,24 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  darkMode: 'class', // This enables class-based dark mode
+  darkMode: 'class',
   content: [
-    "./index.html",          // Fichier root HTML
-    "./src/**/*.{js,ts,jsx,tsx}",  // Tous les fichiers React/TSX dans src/
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {
-        animation: {
-        blob: "blob 7s infinite",
-    },
-          keyframes: {
-        blob: {
+      animation: {
+      
+        blob: "blob 7s infinite", 
+
+        'infinite-scroll': 'infinite-scroll 25s linear infinite', 
+        'slow-scroll': 'infinite-scroll 40s linear infinite',      
+      },
+
+
+      keyframes: {
+      
+        blob: { 
           "0%": {
             transform: "translate(0px, 0px) scale(1)",
           },
@@ -25,9 +32,13 @@ module.exports = {
             transform: "translate(0px, 0px) scale(1)",
           },
         },
+
+        'infinite-scroll': { 
+          from: { transform: 'translateX(0)' },
+          to: { transform: 'translateX(-100%)' },
+        }
       },
     },
   },
   plugins: [],
 }
-
