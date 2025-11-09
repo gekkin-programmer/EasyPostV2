@@ -6,7 +6,7 @@ const SupportSection = () => {
   const { t } = useLanguage();
 
   return (
-    <section className="bg-[#FDFDFC] py-24 px-4 font-sans">
+    <section className="bg-[#FDFDFC] py-8 px-4 font-sans">
       <div 
         className="
           container mx-auto flex max-w-3xl flex-col 
@@ -14,12 +14,12 @@ const SupportSection = () => {
         "
       >
         {/* Top Label */}
-        <p className="text-sm font-semibold uppercase tracking-widest text-[#3C48F6]">
+        <p className="text-sm font-semibold uppercase tracking-widest text-[#0F172A]">
           {t("Customer Support", "Support client")}
         </p>
 
         {/* Main Heading */}
-        <h2 className="text-5xl font-bold text-[#3C48F6] leading-tight">
+        <h2 className="text-5xl font-bold text-[#0F172A] leading-tight">
           {t("Human support, worldwide", "Support humain, partout dans le monde")}
         </h2>
 
@@ -36,9 +36,9 @@ const SupportSection = () => {
           <a
             href="#"
             className="
-              rounded-full bg-green-100 px-8 py-3 font-semibold 
-              text-[#3C48F6] transition-colors duration-200 
-              hover:bg-[#3C48F6] border border-[#3C48F6] hover:text-white
+              rounded-full px-8 py-3 font-semibold 
+              text-white transition-colors duration-200 
+              bg-[#3C48F6] border border-[#3C48F6] hover:text-white
             "
           >
             {t("Visit the Help Center", "Visitez le centre d'aide")}

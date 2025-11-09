@@ -30,7 +30,7 @@ const TabButton: React.FC<TabButtonProps> = ({ children, isActive, onClick }) =>
     className={`
       rounded-full px-5 py-2 text-sm font-semibold transition-colors duration-200
       ${isActive
-        ? 'bg-purple-100 text-purple-800 border border-purple-300'
+        ? 'bg-purple-100 text-[#3C48F6] border border-purple-300'
         : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-100'
       }
     `}
@@ -38,6 +38,7 @@ const TabButton: React.FC<TabButtonProps> = ({ children, isActive, onClick }) =>
     {children}
   </button>
 );
+
 
 const ChecklistItem: React.FC<ChecklistItemProps> = ({ children }) => {
   const { t } = useLanguage();
@@ -48,6 +49,7 @@ const ChecklistItem: React.FC<ChecklistItemProps> = ({ children }) => {
     </li>
   );
 };
+
 
 const CreatorCard: React.FC<CreatorData> = ({ 
   imgSrc, name, followers, platform, platformIcon, iconBgClass 
@@ -83,13 +85,13 @@ const creatorsData: CreatorData[] = [
 ];
 
 const businessesData: CreatorData[] = [
-  { imgSrc: '/business1.jpg', name: 'The Corner Brew', followers: '8.2K', platform: 'Fans on Facebook', platformIcon: <FaStore size={16}/>, iconBgClass: 'bg-green-600' },
-  { imgSrc: '/business2.jpg', name: 'Artisan Designs', followers: '15.7K', platform: 'Followers on Pinterest', platformIcon: <FaPaintBrush size={16}/>, iconBgClass: 'bg-red-500' },
-  { imgSrc: '/business3.jpg', name: 'Local Eats Co.', followers: '25.3K', platform: 'Followers on Instagram', platformIcon: <FaInstagram size={16}/>, iconBgClass: 'bg-gradient-to-br from-yellow-400 via-red-500 to-purple-600' },
+  { imgSrc: '/PBD.jpg', name: 'PBD', followers: '8.2K', platform: 'Fans on Facebook', platformIcon: <FaStore size={16}/>, iconBgClass: 'bg-green-600' },
+  { imgSrc: '/meetormatch.jpg', name: 'MeetOrMatch', followers: '15.7K', platform: 'Followers on Pinterest', platformIcon: <FaPaintBrush size={16}/>, iconBgClass: 'bg-red-500' },
+  { imgSrc: '/logo.JFN.png  ', name: 'JFN High Tech University', followers: '25.3K', platform: 'Followers on Instagram', platformIcon: <FaInstagram size={16}/>, iconBgClass: 'bg-gradient-to-br from-yellow-400 via-red-500 to-purple-600' },
 ];
 
 const agenciesData: CreatorData[] = [
-  { imgSrc: '/agency1.jpg', name: 'Growth Partners', followers: '150+', platform: 'Clients Served', platformIcon: <FaBullhorn size={16}/>, iconBgClass: 'bg-sky-500' },
+  { imgSrc: '/YungEra.jpg', name: 'Yung Era Agency', followers: '150+', platform: 'Instagram', platformIcon: <FaInstagram size={16}/>, iconBgClass: 'bg-gradient-to-br from yellow-400 via red-500 to purple-600' },
   { imgSrc: '/agency2.jpg', name: 'Creative Labs', followers: '99K', platform: 'Followers on LinkedIn', platformIcon: <FaLinkedinIn size={16}/>, iconBgClass: 'bg-[#0A66C2]' },
   { imgSrc: '/agency3.jpg', name: 'Pixel Perfect', followers: 'Top Rated', platform: 'on Dribbble', platformIcon: <FaPaintBrush size={16}/>, iconBgClass: 'bg-pink-500' },
 ];
@@ -151,8 +153,11 @@ const GrowSection = () => {
 
           {/* Right cards */}
           <div className="bg-[#f3e8ff] border border-purple-200/80 rounded-3xl p-8 lg:col-span-3">
+
+
             <h3 className="text-sm font-semibold text-purple-800/90 tracking-widest mb-6">
               {t("THE BUFFER", "LA COMMUNAUTÉ BUFFER")} {t(activeTab.toLowerCase(), activeTab)} {t("COMMUNITY", "COMMUNAUTÉ")}
+
             </h3>
             <div className="grid md:grid-cols-3 gap-6">
               {currentData.map((creator) => (

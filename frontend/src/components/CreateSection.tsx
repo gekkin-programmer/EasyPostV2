@@ -149,6 +149,7 @@ useEffect(() => {
 
           <button className="inline-flex items-center gap-2 bg-[#3C48F6] text-white font-medium px-6 py-3 rounded-full hover:bg-emerald-800 transition">
             {t('Learn more', 'En savoir plus')}
+
             <ArrowRight className="w-5 h-5" />
           </button>
 
