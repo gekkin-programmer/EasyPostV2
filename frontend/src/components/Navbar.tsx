@@ -1,48 +1,50 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaMoon, FaSun, FaChevronDown, FaBars, FaXmark, FaGlobe, FaRocket, FaPaperPlane } from "react-icons/fa6";
+import {
+  FaMoon, FaSun, FaChevronDown, FaBars, FaXmark, FaGlobe, FaRocket, FaPaperPlane,
+  FaFacebookF, FaInstagram, FaTwitter, FaLinkedinIn, FaPinterestP, FaTiktok
+} from "react-icons/fa6";
+import { Link } from 'react-router-dom';
 import { useLanguage } from "../context/LanguageContext";
 
+// Data for the "Features" dropdown
 const megaMenuData = {
+  type: 'mega' as const,
   columns: [
-    {
-      heading: "Core Tools",
-      links: [
-        { label: "Publishing", description: "Plan and schedule content", href: "#", Icon: FaRocket },
-        { label: "Analytics", description: "Measure your performance", href: "#", Icon: FaPaperPlane },
-      ],
-    },
-    {
-      heading: "Advanced",
-      links: [
-        { label: "Engagement", description: "Respond to comments", href: "#", Icon: FaRocket },
-        { label: "AI Assistant", description: "Generate post ideas", href: "#", Icon: FaPaperPlane },
-      ],
-    },
+    { heading: "Core Tools", links: [ { label: "Publishing", description: "Plan and schedule content", href: "#", Icon: FaRocket }, { label: "Analytics", description: "Measure your performance", href: "#", Icon: FaPaperPlane } ] },
+    { heading: "Advanced", links: [ { label: "Engagement", description: "Respond to comments", href: "#", Icon: FaRocket }, { label: "AI Assistant", description: "Generate post ideas", href: "#", Icon: FaPaperPlane } ] },
   ],
-  featured: {
-    label: "New! Introducing Channels",
-    description: "Connect all your social accounts in one place.",
-    href: "#",
-    image: "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=400",
-  },
+  featured: { label: "New! Introducing Channels", description: "Connect all your social accounts.", href: "#", image: "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=400" },
 };
 
+// Data for the "Channels" dropdown
+const channelsMenuData = {
+  type: 'channels' as const,
+  channels: [
+    { label: 'Facebook', Icon: FaFacebookF, href: '#' },
+    { label: 'Instagram', Icon: FaInstagram, href: '#' },
+    { label: 'X / Twitter', Icon: FaTwitter, href: '#' },
+    { label: 'LinkedIn', Icon: FaLinkedinIn, href: '#' },
+    { label: 'Pinterest', Icon: FaPinterestP, href: '#' },
+    { label: 'TikTok', Icon: FaTiktok, href: '#' },
+  ]
+};
+
+// Type definition for navigation links
 type NavLink = {
   label: string;
   href?: string;
   hasDropdown?: boolean;
-  dropdownContent?: typeof megaMenuData;
+  dropdownContent?: typeof megaMenuData | typeof channelsMenuData;
 };
 
+// Main navigation links array
 const navLinks: NavLink[] = [
   { label: "Features", hasDropdown: true, dropdownContent: megaMenuData },
-  { label: "Channels", hasDropdown: true },
-  { label: "Resources", hasDropdown: true },
-  { label: "Community", hasDropdown: true },
-  { label: "Support", hasDropdown: true },
+  { label: "Channels", hasDropdown: true, dropdownContent: channelsMenuData },
+  { label: "Pricing", href: "/pricing" },
+  { label: "Community", href: "/#support-section" },
 ];
-
 
 const Navbar: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -53,57 +55,29 @@ const Navbar: React.FC = () => {
   
   const { language, toggleLanguage, t } = useLanguage();
 
-  const toggleDarkMode = () => {
-    setIsDark(!isDark);
-    document.documentElement.classList.toggle("dark");
-  };
+  const toggleDarkMode = () => { setIsDark(!isDark); document.documentElement.classList.toggle("dark"); };
+  useEffect(() => { const handleScroll = () => { setScrolled(window.scrollY > 10); }; window.addEventListener('scroll', handleScroll); return () => { window.removeEventListener('scroll', handleScroll); }; }, []);
+  useEffect(() => { if (isMobileMenuOpen) document.body.style.overflow = 'hidden'; else document.body.style.overflow = 'unset'; return () => { document.body.style.overflow = 'unset'; }; }, [isMobileMenuOpen]);
 
-  useEffect(() => {
-    const handleScroll = () => { setScrolled(window.scrollY > 10); };
-    window.addEventListener('scroll', handleScroll);
-    return () => { window.removeEventListener('scroll', handleScroll); };
-  }, []);
-
-  useEffect(() => {
-    if (isMobileMenuOpen) document.body.style.overflow = 'hidden';
-    else document.body.style.overflow = 'unset';
-    return () => { document.body.style.overflow = 'unset'; };
-  }, [isMobileMenuOpen]);
-  
+  // Full component implementation for the "Features" Mega Menu
   const MegaMenu = ({ content }: { content: typeof megaMenuData }) => (
-    <motion.div
-      initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }}
-      className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[550px] bg-white dark:bg-gray-800 rounded-xl shadow-xl border border-gray-200/50 dark:border-gray-700/50"
-    >
+    <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[550px] bg-white dark:bg-gray-800 rounded-xl shadow-xl border border-gray-200/50 dark:border-gray-700/50">
         <div className="grid grid-cols-3 gap-4 p-5">
             <div className="col-span-2 grid grid-cols-2 gap-x-6 gap-y-4">
                 {content.columns.map((col) => (
-                    <div key={col.heading}>
-                        <h3 className="text-sm font-semibold text-gray-400 dark:text-gray-500 mb-3">{col.heading}</h3>
-                        <div className="space-y-2">
-                            {col.links.map((link) => (
-                                <a key={link.label} href={link.href} className="group flex items-start gap-3 p-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors">
-                                    <link.Icon className="w-5 h-5 mt-1 text-[#3C48F6]" />
-                                    <div>
-                                        <p className="font-semibold text-sm text-gray-800 dark:text-gray-200">{link.label}</p>
-                                        <p className="text-xs text-gray-500 dark:text-gray-400">{link.description}</p>
-                                    </div>
-                                </a>
-                            ))}
-                        </div>
-                    </div>
+                    <div key={col.heading}><h3 className="text-sm font-semibold text-gray-400 dark:text-gray-500 mb-3">{col.heading}</h3><div className="space-y-2">{col.links.map((link) => (<a key={link.label} href={link.href} className="group flex items-start gap-3 p-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors"><link.Icon className="w-5 h-5 mt-1 text-[#3C48F6]" /><div><p className="font-semibold text-sm text-gray-800 dark:text-gray-200">{link.label}</p><p className="text-xs text-gray-500 dark:text-gray-400">{link.description}</p></div></a>))}</div></div>
                 ))}
             </div>
-            {content.featured && (
-                <a href={content.featured.href} className="group block rounded-lg overflow-hidden relative">
-                    <img src={content.featured.image} alt={content.featured.label} className="w-full h-full object-cover"/>
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"/>
-                    <div className="absolute bottom-0 left-0 p-4">
-                        <p className="font-semibold text-white text-sm">{content.featured.label}</p>
-                        <p className="text-xs text-gray-200">{content.featured.description}</p>
-                    </div>
-                </a>
-            )}
+            {content.featured && (<a href={content.featured.href} className="group block rounded-lg overflow-hidden relative"><img src={content.featured.image} alt={content.featured.label} className="w-full h-full object-cover"/><div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"/><div className="absolute bottom-0 left-0 p-4"><p className="font-semibold text-white text-sm">{content.featured.label}</p><p className="text-xs text-gray-200">{content.featured.description}</p></div></a>)}
+        </div>
+    </motion.div>
+  );
+
+  // Full component implementation for the "Channels" Icon Menu
+  const ChannelsMenu = ({ content }: { content: typeof channelsMenuData }) => (
+    <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-80 bg-white dark:bg-gray-800 rounded-xl shadow-xl border border-gray-200/50 dark:border-gray-700/50">
+        <div className="grid grid-cols-3 gap-4 p-6">
+            {content.channels.map((channel) => (<a key={channel.label} href={channel.href} className="flex flex-col items-center gap-2 p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors"><channel.Icon className="w-6 h-6 text-gray-700 dark:text-gray-300" /><span className="text-xs font-medium text-gray-600 dark:text-gray-400">{channel.label}</span></a>))}
         </div>
     </motion.div>
   );
@@ -112,23 +86,21 @@ const Navbar: React.FC = () => {
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-white/95 dark:bg-gray-900/95 shadow-md' : 'bg-transparent'}`}>
       <div className="max-w-7xl mx-auto px-4 lg:px-8">
         <div className={`flex items-center justify-between transition-all duration-300 ${scrolled ? 'h-14' : 'h-16'}`}>
-          <a href="/" className="flex items-center gap-2">
-            <img src="/Wiggle Logo.png" alt="EasyPost Logo" className="h-8 w-auto" />
-          </a>
-
-          <div className="hidden lg:flex items-center gap-6">
+          <Link to="/" className="flex items-center gap-2"><img src="/Wiggle Logo.png" alt="EasyPost Logo" className="h-8 w-auto" /></Link>
+          
+          <div className="hidden lg:flex items-center gap-8">
             {navLinks.map((item) => (
               <div key={item.label} className="relative" onMouseEnter={() => item.hasDropdown && setHoveredDropdown(item.label)} onMouseLeave={() => setHoveredDropdown(null)} onFocus={() => item.hasDropdown && setHoveredDropdown(item.label)} onBlur={() => setHoveredDropdown(null)}>
-                <a href={item.href || "#"} className="flex items-center gap-1 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-[#3C48F6] dark:hover:text-[#3C48F6] transition">
+                <Link to={item.href || "#"} className="flex items-center gap-1 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-[#3C48F6] dark:hover:text-[#3C48F6] transition">
                   {t(item.label, item.label)}
                   {item.hasDropdown && <FaChevronDown className="w-3 h-3" />}
-                </a>
+                </Link>
                 <AnimatePresence>
-                  {item.hasDropdown && hoveredDropdown === item.label && (item.dropdownContent ? (<MegaMenu content={item.dropdownContent} />) : (
-                      <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} className="absolute top-full left-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-xl shadow-xl py-3 border border-gray-200/50 dark:border-gray-700/50">
-                        <a href="#" className="block px-6 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition">{t("Overview", "Aperçu")}</a>
-                      </motion.div>
-                    )
+                  {item.hasDropdown && hoveredDropdown === item.label && item.dropdownContent && (
+                    <>
+                      {item.dropdownContent.type === 'mega' && (<MegaMenu content={item.dropdownContent} />)}
+                      {item.dropdownContent.type === 'channels' && (<ChannelsMenu content={item.dropdownContent} />)}
+                    </>
                   )}
                 </AnimatePresence>
               </div>
@@ -136,53 +108,70 @@ const Navbar: React.FC = () => {
           </div>
 
           <div className="hidden lg:flex items-center gap-3">
-            <a href="/login" className="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-[#3C48F6] transition-colors">{t("Log in", "Connexion")}</a>
-            <a href="/signup" className="px-5 py-2 bg-[#3C48F6] text-white font-medium text-sm rounded-full hover:bg-blue-600 transition-colors">{t("Get started now", "Commencer")}</a>
+            <Link to="/login" className="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-[#3C48F6] transition-colors">{t("Log in", "Connexion")}</Link>
+            <Link to="/signup" className="px-5 py-2 bg-[#3C48F6] text-white font-medium text-sm rounded-full hover:bg-blue-600 transition-colors">{t("Get started now", "Commencer")}</Link>
             <button aria-label="Toggle language" onClick={toggleLanguage} className="p-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"><FaGlobe className="w-5 h-5" /></button>
             <button aria-label="Toggle dark mode" onClick={toggleDarkMode} className="p-2 rounded-lg text-gray-800 dark:text-yellow-400 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">{isDark ? <FaSun className="w-5 h-5" /> : <FaMoon className="w-5 h-5" />}</button>
           </div>
 
           <div className="lg:hidden flex items-center gap-2">
-             <a href="/signup" className="px-4 py-2 bg-[#3C48F6] text-white font-medium text-sm rounded-lg hover:bg-blue-600 transition">{t("Get started", "Démarrer")}</a>
+             <Link to="/signup" className="px-4 py-2 bg-[#3C48F6] text-white font-medium text-sm rounded-lg hover:bg-blue-600 transition">{t("Get started", "Démarrer")}</Link>
              <button aria-label="Open menu" onClick={() => setIsMobileMenuOpen(true)} className="p-2 rounded-lg text-gray-700 dark:text-gray-300"><FaBars className="w-6 h-6" /></button>
           </div>
         </div>
       </div>
-
+      
       <AnimatePresence>
         {isMobileMenuOpen && (
           <>
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 bg-black/70 z-[999]" onClick={() => setIsMobileMenuOpen(false)} />
-            {/* --- THIS IS THE CORRECTED SECTION --- */}
-            <motion.div
-              initial={{ x: "100%" }} animate={{ x: 0 }} exit={{ x: "100%" }}
-              transition={{ type: "spring", damping: 30, stiffness: 220 }}
-              className="fixed right-0 top-0 h-full w-[85%] max-w-sm bg-white dark:bg-gray-900 shadow-2xl z-[1000] flex flex-col"
-            >
-              {/* Header */}
+            <motion.div initial={{ x: "100%" }} animate={{ x: 0 }} exit={{ x: "100%" }} transition={{ type: "spring", damping: 30, stiffness: 220 }} className="fixed right-0 top-0 h-full w-[85%] max-w-sm bg-white dark:bg-gray-900 shadow-2xl z-[1000] flex flex-col">
               <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-800">
                 <span className="font-semibold text-gray-800 dark:text-gray-200">Menu</span>
                 <button onClick={() => setIsMobileMenuOpen(false)} className="p-2 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800"><FaXmark className="w-6 h-6" /></button>
               </div>
-
-              {/* Navigation Links */}
               <div className="flex-grow overflow-y-auto p-4">
                 {navLinks.map((item) => (
                   <div key={item.label} className="border-b border-gray-100 dark:border-gray-800 last:border-b-0">
-                    {item.href ? (
-                      <a href={item.href} className="block py-4 text-lg font-semibold text-gray-800 dark:text-gray-200" onClick={() => setIsMobileMenuOpen(false)}>{item.label}</a>
-                    ) : (
+                    {item.href ? ( <Link to={item.href} className="block py-4 text-lg font-semibold text-gray-800 dark:text-gray-200" onClick={() => setIsMobileMenuOpen(false)}>{t(item.label, item.label)}</Link> ) : (
                       <>
                         <button onClick={() => setActiveMobileDropdown(activeMobileDropdown === item.label ? null : item.label)} className="w-full flex justify-between items-center py-4 text-lg font-semibold text-gray-800 dark:text-gray-200">
-                          <span>{item.label}</span>
+                          <span>{t(item.label, item.label)}</span>
                           <motion.div animate={{ rotate: activeMobileDropdown === item.label ? 180 : 0 }}><FaChevronDown className="w-4 h-4" /></motion.div>
                         </button>
                         <AnimatePresence>
                           {item.hasDropdown && activeMobileDropdown === item.label && (
-                            <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden pl-4 pb-2">
-                              {/* Simple list for mobile dropdown */}
-                              <a href="#" className="block py-2 text-gray-600 dark:text-gray-400" onClick={() => setIsMobileMenuOpen(false)}>{t("Overview", "Aperçu")}</a>
-                              <a href="#" className="block py-2 text-gray-600 dark:text-gray-400" onClick={() => setIsMobileMenuOpen(false)}>{t("Details", "Détails")}</a>
+                            <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
+                              {item.dropdownContent && item.dropdownContent.type === 'mega' && (
+                                <div className="pl-4 pt-2 pb-4 space-y-4">
+                                  {item.dropdownContent.columns.map((col) => (
+                                    <div key={col.heading}>
+                                      <h4 className="text-sm font-semibold text-gray-400 mb-2">{col.heading}</h4>
+                                      <div className="space-y-1">
+                                        {col.links.map((link) => (
+                                          <Link key={link.label} to={link.href} className="flex items-start gap-3 p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800" onClick={() => setIsMobileMenuOpen(false)}>
+                                            <link.Icon className="w-5 h-5 mt-1 text-[#3C48F6]" />
+                                            <div>
+                                              <p className="font-semibold text-base text-gray-700 dark:text-gray-300">{link.label}</p>
+                                              <p className="text-xs text-gray-500 dark:text-gray-400">{link.description}</p>
+                                            </div>
+                                          </Link>
+                                        ))}
+                                      </div>
+                                    </div>
+                                  ))}
+                                </div>
+                              )}
+                              {item.dropdownContent && item.dropdownContent.type === 'channels' && (
+                                <div className="pl-4 pt-2 pb-4 space-y-1">
+                                  {item.dropdownContent.channels.map((channel) => (
+                                    <Link key={channel.label} to={channel.href} className="flex items-center gap-4 p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800" onClick={() => setIsMobileMenuOpen(false)}>
+                                      <channel.Icon className="w-5 h-5 text-gray-500 dark:text-gray-400" />
+                                      <span className="text-base text-gray-700 dark:text-gray-300">{channel.label}</span>
+                                    </Link>
+                                  ))}
+                                </div>
+                              )}
                             </motion.div>
                           )}
                         </AnimatePresence>
@@ -191,15 +180,13 @@ const Navbar: React.FC = () => {
                   </div>
                 ))}
               </div>
-
-              {/* Footer Actions */}
               <div className="flex-shrink-0 p-4 border-t border-gray-200 dark:border-gray-800 space-y-3">
                 <div className="flex justify-around">
                     <button aria-label="Toggle language" onClick={toggleLanguage} className="p-3 rounded-lg text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-800"><FaGlobe className="w-5 h-5" /></button>
                     <button aria-label="Toggle dark mode" onClick={toggleDarkMode} className="p-3 rounded-lg text-gray-800 dark:text-yellow-400 bg-gray-100 dark:bg-gray-800">{isDark ? <FaSun className="w-5 h-5" /> : <FaMoon className="w-5 h-5" />}</button>
                 </div>
-                <a href="/login" className="block w-full text-center py-3 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 font-medium rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800" onClick={() => setIsMobileMenuOpen(false)}>{t("Log in", "Connexion")}</a>
-                <a href="/signup" className="block w-full text-center py-3 bg-[#3C48F6] text-white font-medium rounded-xl hover:bg-blue-600" onClick={() => setIsMobileMenuOpen(false)}>{t("Get started now", "Commencer")}</a>
+                <Link to="/login" className="block w-full text-center py-3 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 font-medium rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800" onClick={() => setIsMobileMenuOpen(false)}>{t("Log in", "Connexion")}</Link>
+                <Link to="/signup" className="block w-full text-center py-3 bg-[#3C48F6] text-white font-medium rounded-xl hover:bg-blue-600" onClick={() => setIsMobileMenuOpen(false)}>{t("Get started now", "Commencer")}</Link>
               </div>
             </motion.div>
           </>
