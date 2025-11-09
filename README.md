@@ -13,9 +13,9 @@ A beautifully designed, feature-rich frontend for a modern social media manageme
 
 | Homepage (Hero Section) | Pricing Page |
 | :---: | :---: |
-| ![Homepage Screenshot](frontend/readme_assets/Homepage.PNG) | ![Pricing Page Screenshot](frontend/readme-assets/Pricing.PNG) |
-| **Login Page** | **Navbar Mega Menu** |
-| ![Login Page Screenshot](frontend/readme-assets/Login.PNG) |![Darkmode Screenshot](frontend/readme-assets/Darkmode.PNG)|
+| ![Homepage Screenshot](frontend/public/Homepage.PNG) | ![Pricing Page Screenshot](frontend/public/Pricing.PNG) |
+| **Login Page** | **Dark Mode** |
+| ![Login Page Screenshot](frontend/public/Login.PNG) |![Darkmode Screenshot](frontend/public/Darkmode.PNG)|
 
 
 ##  Key Features
