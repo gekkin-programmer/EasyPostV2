@@ -1,6 +1,6 @@
 # EAsyPost - Modern Social Media Dashboard Frontend
 
-![EAsyPost Logo](public/Wiggle%20Logo.png)
+![EAsyPost Logo](public/Wiggle Logo.png)
 
 A beautifully designed, feature-rich frontend for a modern social media management platform, inspired by industry leaders like Buffer and Vercel. This project was built from the ground up using a professional tech stack including Vite, React, TypeScript, and Tailwind CSS.
 
@@ -9,7 +9,7 @@ A beautifully designed, feature-rich frontend for a modern social media manageme
 
 ---
 
-## 📸 Screenshots
+##  Screenshots
 
 | Homepage (Hero Section) | Pricing Page |
 | :---: | :---: |
