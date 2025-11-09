@@ -39,7 +39,6 @@ const HomePage: React.FC = () => {
       </div>
       <ConnectSection />
       <GrowSection />
-      <ResourcesSection />
       <SupportSection />
     </>
   );
