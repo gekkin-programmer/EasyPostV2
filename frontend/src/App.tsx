@@ -15,6 +15,8 @@ import NotFoundPage from './pages/NotFoundPage';   // <-- IMPORT
 function App() {
   const [isLoading, setIsLoading] = useState(true);
 
+  // trigger vercel
+
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
