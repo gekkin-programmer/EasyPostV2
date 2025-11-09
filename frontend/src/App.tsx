@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { LanguageProvider } from './context/LanguageContext';
 
 import Preloader from './components/Preloader'; 
-import MainLayout from './layouts/MainLayout';
+import MainLayout from './Layouts/MainLayout';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
@@ -14,6 +14,8 @@ import NotFoundPage from './pages/NotFoundPage';   // <-- IMPORT
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
+
+  // trigger vercel
 
   useEffect(() => {
     const timer = setTimeout(() => {
