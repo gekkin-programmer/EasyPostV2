@@ -11,28 +11,65 @@ import { useLanguage } from "../context/LanguageContext";
 const megaMenuData = {
   type: 'mega' as const,
   columns: [
-    { heading: "Core Tools", links: [ { label: "Publishing", description: "Plan and schedule content", href: "#", Icon: FaRocket }, { label: "Analytics", description: "Measure your performance", href: "#", Icon: FaPaperPlane } ] },
-    { heading: "Advanced", links: [ { label: "Engagement", description: "Respond to comments", href: "#", Icon: FaRocket }, { label: "AI Assistant", description: "Generate post ideas", href: "#", Icon: FaPaperPlane } ] },
+    { 
+      heading: { en: "Core Tools", fr: "Outils Principaux" }, 
+      links: [ 
+        { 
+          label: { en: "Publishing", fr: "Publication" }, 
+          description: { en: "Plan and schedule content", fr: "Planifiez et programmez du contenu" }, 
+          href: "#", 
+          Icon: FaRocket 
+        }, 
+        { 
+          label: { en: "Analytics", fr: "Analytique" }, 
+          description: { en: "Measure your performance", fr: "Mesurez vos performances" }, 
+          href: "#", 
+          Icon: FaPaperPlane 
+        } 
+      ] 
+    },
+    { 
+      heading: { en: "Advanced", fr: "Avancé" }, 
+      links: [ 
+        { 
+          label: { en: "Engagement", fr: "Engagement" }, 
+          description: { en: "Respond to comments", fr: "Répondez aux commentaires" }, 
+          href: "#", 
+          Icon: FaRocket 
+        }, 
+        { 
+          label: { en: "AI Assistant", fr: "Assistant IA" }, 
+          description: { en: "Generate post ideas", fr: "Générez des idées de publications" }, 
+          href: "#", 
+          Icon: FaPaperPlane 
+        } 
+      ] 
+    },
   ],
-  featured: { label: "New! Introducing Channels", description: "Connect all your social accounts.", href: "#", image: "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=400" },
+  featured: { 
+    label: { en: "New! Introducing Channels", fr: "Nouveau ! Présentation des Canaux" }, 
+    description: { en: "Connect all your social accounts.", fr: "Connectez tous vos comptes sociaux." }, 
+    href: "#", 
+    image: "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=400" 
+  },
 };
 
 // Data for the "Channels" dropdown
 const channelsMenuData = {
   type: 'channels' as const,
   channels: [
-    { label: 'Facebook', Icon: FaFacebookF, href: '#' },
-    { label: 'Instagram', Icon: FaInstagram, href: '#' },
-    { label: 'X / Twitter', Icon: FaTwitter, href: '#' },
-    { label: 'LinkedIn', Icon: FaLinkedinIn, href: '#' },
-    { label: 'Pinterest', Icon: FaPinterestP, href: '#' },
-    { label: 'TikTok', Icon: FaTiktok, href: '#' },
+    { label: { en: 'Facebook', fr: 'Facebook' }, Icon: FaFacebookF, href: '#' },
+    { label: { en: 'Instagram', fr: 'Instagram' }, Icon: FaInstagram, href: '#' },
+    { label: { en: 'X / Twitter', fr: 'X / Twitter' }, Icon: FaTwitter, href: '#' },
+    { label: { en: 'LinkedIn', fr: 'LinkedIn' }, Icon: FaLinkedinIn, href: '#' },
+    { label: { en: 'Pinterest', fr: 'Pinterest' }, Icon: FaPinterestP, href: '#' },
+    { label: { en: 'TikTok', fr: 'TikTok' }, Icon: FaTiktok, href: '#' },
   ]
 };
 
 // Type definition for navigation links
 type NavLink = {
-  label: string;
+  label: { en: string; fr: string };
   href?: string;
   hasDropdown?: boolean;
   dropdownContent?: typeof megaMenuData | typeof channelsMenuData;
@@ -40,10 +77,24 @@ type NavLink = {
 
 // Main navigation links array
 const navLinks: NavLink[] = [
-  { label: "Features", hasDropdown: true, dropdownContent: megaMenuData },
-  { label: "Channels", hasDropdown: true, dropdownContent: channelsMenuData },
-  { label: "Pricing", href: "/pricing" },
-  { label: "Community", href: "/#support-section" },
+  { 
+    label: { en: "Features", fr: "Fonctionnalités" }, 
+    hasDropdown: true, 
+    dropdownContent: megaMenuData 
+  },
+  { 
+    label: { en: "Channels", fr: "Canaux" }, 
+    hasDropdown: true, 
+    dropdownContent: channelsMenuData 
+  },
+  { 
+    label: { en: "Pricing", fr: "Tarifs" }, 
+    href: "/pricing" 
+  },
+  { 
+    label: { en: "Community", fr: "Communauté" }, 
+    href: "/#support-section" 
+  },
 ];
 
 const Navbar: React.FC = () => {
@@ -52,33 +103,113 @@ const Navbar: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [hoveredDropdown, setHoveredDropdown] = useState<string | null>(null);
   const [activeMobileDropdown, setActiveMobileDropdown] = useState<string | null>(null);
-  
+
   const { language, toggleLanguage, t } = useLanguage();
 
-  const toggleDarkMode = () => { setIsDark(!isDark); document.documentElement.classList.toggle("dark"); };
-  useEffect(() => { const handleScroll = () => { setScrolled(window.scrollY > 10); }; window.addEventListener('scroll', handleScroll); return () => { window.removeEventListener('scroll', handleScroll); }; }, []);
-  useEffect(() => { if (isMobileMenuOpen) document.body.style.overflow = 'hidden'; else document.body.style.overflow = 'unset'; return () => { document.body.style.overflow = 'unset'; }; }, [isMobileMenuOpen]);
+  const toggleDarkMode = () => { 
+    setIsDark(!isDark); 
+    document.documentElement.classList.toggle("dark"); 
+  };
+
+  useEffect(() => { 
+    const handleScroll = () => { 
+      setScrolled(window.scrollY > 10); 
+    }; 
+    window.addEventListener('scroll', handleScroll); 
+    return () => { 
+      window.removeEventListener('scroll', handleScroll); 
+    }; 
+  }, []);
+
+  useEffect(() => { 
+    if (isMobileMenuOpen) document.body.style.overflow = 'hidden'; 
+    else document.body.style.overflow = 'unset'; 
+    return () => { document.body.style.overflow = 'unset'; }; 
+  }, [isMobileMenuOpen]);
+
+  // Helper function to get translated text
+  const getTranslatedText = (text: { en: string; fr: string } | string) => {
+    if (typeof text === 'string') return text;
+    return language === 'fr' ? text.fr : text.en;
+  };
 
   // Full component implementation for the "Features" Mega Menu
   const MegaMenu = ({ content }: { content: typeof megaMenuData }) => (
-    <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[550px] bg-white dark:bg-gray-800 rounded-xl shadow-xl border border-gray-200/50 dark:border-gray-700/50">
-        <div className="grid grid-cols-3 gap-4 p-5">
-            <div className="col-span-2 grid grid-cols-2 gap-x-6 gap-y-4">
-                {content.columns.map((col) => (
-                    <div key={col.heading}><h3 className="text-sm font-semibold text-gray-400 dark:text-gray-500 mb-3">{col.heading}</h3><div className="space-y-2">{col.links.map((link) => (<a key={link.label} href={link.href} className="group flex items-start gap-3 p-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors"><link.Icon className="w-5 h-5 mt-1 text-[#3C48F6]" /><div><p className="font-semibold text-sm text-gray-800 dark:text-gray-200">{link.label}</p><p className="text-xs text-gray-500 dark:text-gray-400">{link.description}</p></div></a>))}</div></div>
+    <motion.div 
+      initial={{ opacity: 0, y: -10 }} 
+      animate={{ opacity: 1, y: 0 }} 
+      exit={{ opacity: 0, y: -10 }} 
+      className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[550px] bg-white dark:bg-gray-800 rounded-xl shadow-xl border border-gray-200/50 dark:border-gray-700/50"
+    >
+      <div className="grid grid-cols-3 gap-4 p-5">
+        <div className="col-span-2 grid grid-cols-2 gap-x-6 gap-y-4">
+          {content.columns.map((col) => (
+            <div key={getTranslatedText(col.heading)}>
+              <h3 className="text-sm font-semibold text-gray-400 dark:text-gray-500 mb-3">
+                {getTranslatedText(col.heading)}
+              </h3>
+              <div className="space-y-2">
+                {col.links.map((link) => (
+                  <a 
+                    key={getTranslatedText(link.label)} 
+                    href={link.href} 
+                    className="group flex items-start gap-3 p-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors"
+                  >
+                    <link.Icon className="w-5 h-5 mt-1 text-[#3C48F6]" />
+                    <div>
+                      <p className="font-semibold text-sm text-gray-800 dark:text-gray-200">
+                        {getTranslatedText(link.label)}
+                      </p>
+                      <p className="text-xs text-gray-500 dark:text-gray-400">
+                        {getTranslatedText(link.description)}
+                      </p>
+                    </div>
+                  </a>
                 ))}
+              </div>
             </div>
-            {content.featured && (<a href={content.featured.href} className="group block rounded-lg overflow-hidden relative"><img src={content.featured.image} alt={content.featured.label} className="w-full h-full object-cover"/><div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"/><div className="absolute bottom-0 left-0 p-4"><p className="font-semibold text-white text-sm">{content.featured.label}</p><p className="text-xs text-gray-200">{content.featured.description}</p></div></a>)}
+          ))}
         </div>
+        {content.featured && (
+          <a href={content.featured.href} className="group block rounded-lg overflow-hidden relative">
+            <img src={content.featured.image} alt={getTranslatedText(content.featured.label)} className="w-full h-full object-cover"/>
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"/>
+            <div className="absolute bottom-0 left-0 p-4">
+              <p className="font-semibold text-white text-sm">
+                {getTranslatedText(content.featured.label)}
+              </p>
+              <p className="text-xs text-gray-200">
+                {getTranslatedText(content.featured.description)}
+              </p>
+            </div>
+          </a>
+        )}
+      </div>
     </motion.div>
   );
 
   // Full component implementation for the "Channels" Icon Menu
   const ChannelsMenu = ({ content }: { content: typeof channelsMenuData }) => (
-    <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-80 bg-white dark:bg-gray-800 rounded-xl shadow-xl border border-gray-200/50 dark:border-gray-700/50">
-        <div className="grid grid-cols-3 gap-4 p-6">
-            {content.channels.map((channel) => (<a key={channel.label} href={channel.href} className="flex flex-col items-center gap-2 p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors"><channel.Icon className="w-6 h-6 text-gray-700 dark:text-gray-300" /><span className="text-xs font-medium text-gray-600 dark:text-gray-400">{channel.label}</span></a>))}
-        </div>
+    <motion.div 
+      initial={{ opacity: 0, y: -10 }} 
+      animate={{ opacity: 1, y: 0 }} 
+      exit={{ opacity: 0, y: -10 }} 
+      className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-80 bg-white dark:bg-gray-800 rounded-xl shadow-xl border border-gray-200/50 dark:border-gray-700/50"
+    >
+      <div className="grid grid-cols-3 gap-4 p-6">
+        {content.channels.map((channel) => (
+          <a 
+            key={getTranslatedText(channel.label)} 
+            href={channel.href} 
+            className="flex flex-col items-center gap-2 p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors"
+          >
+            <channel.Icon className="w-6 h-6 text-gray-700 dark:text-gray-300" />
+            <span className="text-xs font-medium text-gray-600 dark:text-gray-400">
+              {getTranslatedText(channel.label)}
+            </span>
+          </a>
+        ))}
+      </div>
     </motion.div>
   );
 
@@ -86,17 +217,29 @@ const Navbar: React.FC = () => {
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-white/95 dark:bg-gray-900/95 shadow-md' : 'bg-transparent'}`}>
       <div className="max-w-7xl mx-auto px-4 lg:px-8">
         <div className={`flex items-center justify-between transition-all duration-300 ${scrolled ? 'h-14' : 'h-16'}`}>
-          <Link to="/" className="flex items-center gap-2"><img src="/Wiggle Logo.png" alt="EasyPost Logo" className="h-8 w-auto" /></Link>
+          <Link to="/" className="flex items-center gap-2">
+            <img src="/Wiggle Logo.png" alt="EasyPost Logo" className="h-8 w-auto" />
+          </Link>
           
           <div className="hidden lg:flex items-center gap-8">
             {navLinks.map((item) => (
-              <div key={item.label} className="relative" onMouseEnter={() => item.hasDropdown && setHoveredDropdown(item.label)} onMouseLeave={() => setHoveredDropdown(null)} onFocus={() => item.hasDropdown && setHoveredDropdown(item.label)} onBlur={() => setHoveredDropdown(null)}>
-                <Link to={item.href || "#"} className="flex items-center gap-1 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-[#3C48F6] dark:hover:text-[#3C48F6] transition">
-                  {t(item.label, item.label)}
+              <div 
+                key={getTranslatedText(item.label)} 
+                className="relative" 
+                onMouseEnter={() => item.hasDropdown && setHoveredDropdown(getTranslatedText(item.label))} 
+                onMouseLeave={() => setHoveredDropdown(null)} 
+                onFocus={() => item.hasDropdown && setHoveredDropdown(getTranslatedText(item.label))} 
+                onBlur={() => setHoveredDropdown(null)}
+              >
+                <Link 
+                  to={item.href || "#"} 
+                  className="flex items-center gap-1 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-[#3C48F6] dark:hover:text-[#3C48F6] transition"
+                >
+                  {getTranslatedText(item.label)}
                   {item.hasDropdown && <FaChevronDown className="w-3 h-3" />}
                 </Link>
                 <AnimatePresence>
-                  {item.hasDropdown && hoveredDropdown === item.label && item.dropdownContent && (
+                  {item.hasDropdown && hoveredDropdown === getTranslatedText(item.label) && item.dropdownContent && (
                     <>
                       {item.dropdownContent.type === 'mega' && (<MegaMenu content={item.dropdownContent} />)}
                       {item.dropdownContent.type === 'channels' && (<ChannelsMenu content={item.dropdownContent} />)}
@@ -108,52 +251,100 @@ const Navbar: React.FC = () => {
           </div>
 
           <div className="hidden lg:flex items-center gap-3">
-            <Link to="/login" className="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-[#3C48F6] transition-colors">{t("Log in", "Connexion")}</Link>
-            <Link to="/signup" className="px-5 py-2 bg-[#3C48F6] text-white font-medium text-sm rounded-full hover:bg-blue-600 transition-colors">{t("Get started now", "Commencer")}</Link>
-            <button aria-label="Toggle language" onClick={toggleLanguage} className="p-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"><FaGlobe className="w-5 h-5" /></button>
-            <button aria-label="Toggle dark mode" onClick={toggleDarkMode} className="p-2 rounded-lg text-gray-800 dark:text-yellow-400 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">{isDark ? <FaSun className="w-5 h-5" /> : <FaMoon className="w-5 h-5" />}</button>
+            <Link to="/login" className="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-[#3C48F6] transition-colors">
+              {t("Log in", "Connexion")}
+            </Link>
+            <Link to="/signup" className="px-5 py-2 bg-[#3C48F6] text-white font-medium text-sm rounded-full hover:bg-blue-600 transition-colors">
+              {t("Get started now", "Commencer")}
+            </Link>
+            <button aria-label="Toggle language" onClick={toggleLanguage} className="p-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+              <FaGlobe className="w-5 h-5" />
+            </button>
+            <button aria-label="Toggle dark mode" onClick={toggleDarkMode} className="p-2 rounded-lg text-gray-800 dark:text-yellow-400 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+              {isDark ? <FaSun className="w-5 h-5" /> : <FaMoon className="w-5 h-5" />}
+            </button>
           </div>
 
           <div className="lg:hidden flex items-center gap-2">
-             <Link to="/signup" className="px-4 py-2 bg-[#3C48F6] text-white font-medium text-sm rounded-lg hover:bg-blue-600 transition">{t("Get started", "Démarrer")}</Link>
-             <button aria-label="Open menu" onClick={() => setIsMobileMenuOpen(true)} className="p-2 rounded-lg text-gray-700 dark:text-gray-300"><FaBars className="w-6 h-6" /></button>
+            <Link to="/signup" className="px-4 py-2 bg-[#3C48F6] text-white font-medium text-sm rounded-lg hover:bg-blue-600 transition">
+              {t("Get started", "Démarrer")}
+            </Link>
+            <button aria-label="Open menu" onClick={() => setIsMobileMenuOpen(true)} className="p-2 rounded-lg text-gray-700 dark:text-gray-300">
+              <FaBars className="w-6 h-6" />
+            </button>
           </div>
         </div>
       </div>
-      
+
       <AnimatePresence>
         {isMobileMenuOpen && (
           <>
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 bg-black/70 z-[999]" onClick={() => setIsMobileMenuOpen(false)} />
             <motion.div initial={{ x: "100%" }} animate={{ x: 0 }} exit={{ x: "100%" }} transition={{ type: "spring", damping: 30, stiffness: 220 }} className="fixed right-0 top-0 h-full w-[85%] max-w-sm bg-white dark:bg-gray-900 shadow-2xl z-[1000] flex flex-col">
               <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-800">
-                <span className="font-semibold text-gray-800 dark:text-gray-200">Menu</span>
-                <button onClick={() => setIsMobileMenuOpen(false)} className="p-2 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800"><FaXmark className="w-6 h-6" /></button>
+                <span className="font-semibold text-gray-800 dark:text-gray-200">
+                  {language === 'fr' ? 'Menu' : 'Menu'}
+                </span>
+                <div className="flex items-center gap-2">
+                  <button aria-label="Toggle language" onClick={toggleLanguage} className="p-2 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+                    <FaGlobe className="w-5 h-5" />
+                  </button>
+                  <button aria-label="Toggle dark mode" onClick={toggleDarkMode} className="p-2 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+                    {isDark ? <FaSun className="w-5 h-5" /> : <FaMoon className="w-5 h-5" />}
+                  </button>
+                  <button onClick={() => setIsMobileMenuOpen(false)} className="p-2 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+                    <FaXmark className="w-6 h-6" />
+                  </button>
+                </div>
               </div>
               <div className="flex-grow overflow-y-auto p-4">
                 {navLinks.map((item) => (
-                  <div key={item.label} className="border-b border-gray-100 dark:border-gray-800 last:border-b-0">
-                    {item.href ? ( <Link to={item.href} className="block py-4 text-lg font-semibold text-gray-800 dark:text-gray-200" onClick={() => setIsMobileMenuOpen(false)}>{t(item.label, item.label)}</Link> ) : (
+                  <div key={getTranslatedText(item.label)} className="border-b border-gray-100 dark:border-gray-800 last:border-b-0">
+                    {item.href ? ( 
+                      <Link 
+                        to={item.href} 
+                        className="block py-4 text-lg font-semibold text-gray-800 dark:text-gray-200" 
+                        onClick={() => setIsMobileMenuOpen(false)}
+                      >
+                        {getTranslatedText(item.label)}
+                      </Link> 
+                    ) : (
                       <>
-                        <button onClick={() => setActiveMobileDropdown(activeMobileDropdown === item.label ? null : item.label)} className="w-full flex justify-between items-center py-4 text-lg font-semibold text-gray-800 dark:text-gray-200">
-                          <span>{t(item.label, item.label)}</span>
-                          <motion.div animate={{ rotate: activeMobileDropdown === item.label ? 180 : 0 }}><FaChevronDown className="w-4 h-4" /></motion.div>
+                        <button 
+                          onClick={() => setActiveMobileDropdown(activeMobileDropdown === getTranslatedText(item.label) ? null : getTranslatedText(item.label))} 
+                          className="w-full flex justify-between items-center py-4 text-lg font-semibold text-gray-800 dark:text-gray-200"
+                        >
+                          <span>{getTranslatedText(item.label)}</span>
+                          <motion.div animate={{ rotate: activeMobileDropdown === getTranslatedText(item.label) ? 180 : 0 }}>
+                            <FaChevronDown className="w-4 h-4" />
+                          </motion.div>
                         </button>
                         <AnimatePresence>
-                          {item.hasDropdown && activeMobileDropdown === item.label && (
+                          {item.hasDropdown && activeMobileDropdown === getTranslatedText(item.label) && (
                             <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
                               {item.dropdownContent && item.dropdownContent.type === 'mega' && (
                                 <div className="pl-4 pt-2 pb-4 space-y-4">
                                   {item.dropdownContent.columns.map((col) => (
-                                    <div key={col.heading}>
-                                      <h4 className="text-sm font-semibold text-gray-400 mb-2">{col.heading}</h4>
+                                    <div key={getTranslatedText(col.heading)}>
+                                      <h4 className="text-sm font-semibold text-gray-400 mb-2">
+                                        {getTranslatedText(col.heading)}
+                                      </h4>
                                       <div className="space-y-1">
                                         {col.links.map((link) => (
-                                          <Link key={link.label} to={link.href} className="flex items-start gap-3 p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800" onClick={() => setIsMobileMenuOpen(false)}>
+                                          <Link 
+                                            key={getTranslatedText(link.label)} 
+                                            to={link.href} 
+                                            className="flex items-start gap-3 p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800" 
+                                            onClick={() => setIsMobileMenuOpen(false)}
+                                          >
                                             <link.Icon className="w-5 h-5 mt-1 text-[#3C48F6]" />
                                             <div>
-                                              <p className="font-semibold text-base text-gray-700 dark:text-gray-300">{link.label}</p>
-                                              <p className="text-xs text-gray-500 dark:text-gray-400">{link.description}</p>
+                                              <p className="font-semibold text-base text-gray-700 dark:text-gray-300">
+                                                {getTranslatedText(link.label)}
+                                              </p>
+                                              <p className="text-xs text-gray-500 dark:text-gray-400">
+                                                {getTranslatedText(link.description)}
+                                              </p>
                                             </div>
                                           </Link>
                                         ))}
@@ -165,9 +356,16 @@ const Navbar: React.FC = () => {
                               {item.dropdownContent && item.dropdownContent.type === 'channels' && (
                                 <div className="pl-4 pt-2 pb-4 space-y-1">
                                   {item.dropdownContent.channels.map((channel) => (
-                                    <Link key={channel.label} to={channel.href} className="flex items-center gap-4 p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800" onClick={() => setIsMobileMenuOpen(false)}>
+                                    <Link 
+                                      key={getTranslatedText(channel.label)} 
+                                      to={channel.href} 
+                                      className="flex items-center gap-4 p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800" 
+                                      onClick={() => setIsMobileMenuOpen(false)}
+                                    >
                                       <channel.Icon className="w-5 h-5 text-gray-500 dark:text-gray-400" />
-                                      <span className="text-base text-gray-700 dark:text-gray-300">{channel.label}</span>
+                                      <span className="text-base text-gray-700 dark:text-gray-300">
+                                        {getTranslatedText(channel.label)}
+                                      </span>
                                     </Link>
                                   ))}
                                 </div>
@@ -179,14 +377,24 @@ const Navbar: React.FC = () => {
                     )}
                   </div>
                 ))}
-              </div>
-              <div className="flex-shrink-0 p-4 border-t border-gray-200 dark:border-gray-800 space-y-3">
-                <div className="flex justify-around">
-                    <button aria-label="Toggle language" onClick={toggleLanguage} className="p-3 rounded-lg text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-800"><FaGlobe className="w-5 h-5" /></button>
-                    <button aria-label="Toggle dark mode" onClick={toggleDarkMode} className="p-3 rounded-lg text-gray-800 dark:text-yellow-400 bg-gray-100 dark:bg-gray-800">{isDark ? <FaSun className="w-5 h-5" /> : <FaMoon className="w-5 h-5" />}</button>
+                
+                {/* Login and Get Started buttons positioned after nav links */}
+                <div className="mt-6 space-y-3">
+                  <Link 
+                    to="/login" 
+                    className="block w-full text-center py-3 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 font-medium rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors" 
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    {t("Log in", "Connexion")}
+                  </Link>
+                  <Link 
+                    to="/signup" 
+                    className="block w-full text-center py-3 bg-[#3C48F6] text-white font-medium rounded-xl hover:bg-blue-600 transition-colors" 
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    {t("Get started now", "Commencer")}
+                  </Link>
                 </div>
-                <Link to="/login" className="block w-full text-center py-3 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 font-medium rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800" onClick={() => setIsMobileMenuOpen(false)}>{t("Log in", "Connexion")}</Link>
-                <Link to="/signup" className="block w-full text-center py-3 bg-[#3C48F6] text-white font-medium rounded-xl hover:bg-blue-600" onClick={() => setIsMobileMenuOpen(false)}>{t("Get started now", "Commencer")}</Link>
               </div>
             </motion.div>
           </>
