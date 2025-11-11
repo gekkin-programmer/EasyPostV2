@@ -28,7 +28,7 @@ function App() {
 
   return (
     <LanguageProvider>
-      <BrowserRouter>
+      <BrowserRouter basename="/EasyPostV2">
         {/*
           The BrowserRouter is now always rendered.
           We use a ternary operator to decide what to show inside it.
