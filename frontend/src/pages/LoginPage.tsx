@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import Logo from '../assets/Wiggle Logo.png';
 // --- 1. IMPORT Link from react-router-dom ---
 import { Link } from 'react-router-dom'; 
 import { FaGoogle, FaEye, FaEyeSlash, FaSpinner } from 'react-icons/fa6';
@@ -35,7 +36,7 @@ const LoginPage: React.FC = () => {
         <div className="mx-auto w-full max-w-sm lg:w-96">
           <div>
             {/* Using Link for the logo as well is good practice */}
-            <Link to="/"><img className="h-10 w-auto" src="/Wiggle Logo.png" alt="EAsyPost Logo" /></Link>
+            <Link to="/"><img className="h-10 w-auto" src={Logo} alt="EAsyPost Logo" /></Link>
             <h1 className="mt-8 text-3xl font-bold tracking-tight text-gray-900 dark:text-white">Welcome back</h1>
             <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">Sign in to continue to EAsyPost.</p>
           </div>

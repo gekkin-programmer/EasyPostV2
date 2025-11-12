@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import pageLogo from "../assets/Wiggle Logo.png";
 import {
   FaMoon, FaSun, FaChevronDown, FaBars, FaXmark, FaGlobe, FaRocket, FaPaperPlane,
   FaFacebookF, FaInstagram, FaTwitter, FaLinkedinIn, FaPinterestP, FaTiktok
@@ -217,9 +218,9 @@ const Navbar: React.FC = () => {
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-white/95 dark:bg-gray-900/95 shadow-md' : 'bg-transparent'}`}>
       <div className="max-w-7xl mx-auto px-4 lg:px-8">
         <div className={`flex items-center justify-between transition-all duration-300 ${scrolled ? 'h-14' : 'h-16'}`}>
-          <Link to="/" className="flex items-center gap-2">
-            <img src="/Wiggle Logo.png" alt="EasyPost Logo" className="h-8 w-auto" />
-          </Link>
+          <a href="/" className="flex items-center gap-2">
+         <img src={pageLogo} alt="EasyPost Logo" className="h-8 w-auto" />
+          </a>
           
           <div className="hidden lg:flex items-center gap-8">
             {navLinks.map((item) => (
