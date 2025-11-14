@@ -15,7 +15,7 @@ A beautifully designed, feature-rich frontend for a modern social media manageme
 | :---: | :---: |
 | ![Homepage Screenshot](frontend/src/assets/Homepage.PNG) | ![Pricing Page Screenshot](frontend/src/assets/Pricing.PNG) |
 | **Login Page** | **Dark Mode** |
-| ![Login Page Screenshot](frontend/src/assetsLogin.PNG) |![Darkmode Screenshot](frontend/src/assets/Darkmode.PNG)|
+| ![Login Page Screenshot](frontend/src/assets/Login.PNG) |![Darkmode Screenshot](frontend/src/assets/Darkmode.PNG)|
 
 
 ##  Key Features
